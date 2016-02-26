@@ -10,7 +10,7 @@ Teemu Väisänen: If brute-forcing of encryption is possible in a feasible time,
 
 Currently, from technical point of view there are no obstacles for creating such a software, even tough Apple claims in that they cannot unlock device for anyone [Apple]. If such software is ever created, it has to be designed, created, tested, used, shared, and managed properly, otherwise (and most likely still [Bonneau]) it shall decrease the level of security and be misused. It is worth to note that there exist other ways to get the data from various devices that do not require breaking the encryption.
 
-https://www.apple.com/business/docs/iOS_Security_Guide.pdf [iPhone 5c = A6 (no Secure Enclave as hardware)]
+https://www.apple.com/business/docs/iOS_Security_Guide.pdf [iPhone 5c = A6 (no Secure Enclave as hardware) https://en.wikipedia.org/wiki/IPhone_5C]
 
 Tarmo Randel: It seems that a decision was made in evidence handling / forensics process to reset suspects Apple ID password [Chmielewski] meaning that the device could not sync latest information after that to iCloud for easier retrieval by the FBI. While the decision made under the circumstances can be understood there is room for further discussion if and how the procedures could be improved. By doing technical analysis of the publicly available court order one can come to conclusion that Apple can probably indeed provide the FBI what the agency is asking for - custom firmware tailored specifically to disable one feature - and it may be easier in this case since the iPhone model obtained from the suspect was a model with less advanced security implementation (lacks a Secure Enclave in hardware) and this is allegedly not isolated case.
 
