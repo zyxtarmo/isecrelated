@@ -14,12 +14,21 @@ https://www.apple.com/business/docs/iOS_Security_Guide.pdf [iPhone 5c = A6 (no S
 
 Tarmo Randel: It seems that a decision was made in evidence handling / forensics process to reset suspects Apple ID password [Chmielewski] meaning that the device could not sync latest information after that to iCloud for easier retrieval by the FBI. While the decision made under the circumstances can be understood there is room for further discussion if and how the procedures could be improved. By doing technical analysis of the publicly available court order one can come to conclusion that Apple can probably indeed provide the FBI what the agency is asking for - custom firmware tailored specifically to disable one feature - and it may be easier in this case since the iPhone model obtained from the suspect was a model with less advanced security implementation (lacks a Secure Enclave in hardware) and this is allegedly not isolated case.
 
-Apple has gone through a lot of effort to create device where encryption with operational measures are used to provide as secure environment to the user as possible while maintaining usability (4-digit pin code). There are some security certifications and programs where Apple has or wants it's iOS to be listed (FIPS 140-2, ISO 15408, CSfC) and while having technical capability of providing law enforcement agencies means to evade some security measures in order to provide easier access to the device, this, as usually, raises some legal and policy concerns in current globalized world.
+Apple has gone through a lot of effort to create device where encryption with operational measures are used to provide as secure environment to the user as possible while maintaining usability (4-digit pin code). There are some security certifications and programs where Apple has or wants it's iOS to be listed (FIPS 140-2, ISO 15408, CSfC) and while having technical capability of providing law enforcement agencies means to evade some security measures in order to provide easier access to the device, this, as usually, raises some legal and policy concerns in current globalized world. [http://dspace.mit.edu/bitstream/handle/1721.1/97690/MIT-CSAIL-TR-2015-026.pdf?sequence=1]
 
-Apple: In today's digital world, the "key" to an encrypted system is a piece of information that unlocks the data, and it is only as secure as the protections around it. Once the information is known, or a way to bypass the code is revealed, the encryption can be defeated by anyone with that knowledge. [https://www.apple.com/customer-letter/]
+https://www.apple.com/customer-letter/
 
-Lorena Trinberg:
-The 2013 Report of the Special Rapporteur on the promotion and
+Apple: In today's digital world, the "key" to an encrypted system is a piece of information that unlocks the data, and it is only as secure as the protections around it. Once the information is known, or a way to bypass the code is revealed, the encryption can be defeated by anyone with that knowledge.
+
+
+Tomáš Minárik: In short, the FBI is asking Apple to help enable it to brute-force the
+encryption which is designed to be unbreakable by Apple itself. According to
+the Guardian, as the U.S. law is based on precedent, the result of
+this case can influence the way encryption is treated in the U.S., which may
+have a massive effect on technology companies trying to provide high-level
+cyber security to their customers
+
+Lorena Trinberg: The 2013 Report of the Special Rapporteur on the promotion and
 protection of the right to freedom of opinion and expression pointed out
 that security and anonymity of communication are already undermined by
 certain national law and that intrusive acts threaten the democratic
@@ -54,5 +63,5 @@ software to access user data for more than law enforcement purposes. After
 all, it remains to be seen what legal developments on global level will
 follow upon this case."
 
-http://dspace.mit.edu/bitstream/handle/1721.1/97690/MIT-CSAIL-TR-2015-026.pdf?sequence=1
+
 
