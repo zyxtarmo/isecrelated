@@ -2,7 +2,15 @@
 
 https://en.m.wikipedia.org/wiki/2015_San_Bernardino_attack
 
+On December 2, 2015, 14 people were killed and 22 were seriously injured in a terrorist attack at the Inland Regional Center in San Bernardino, California, which consisted of a mass shooting and an attempted bombing. The perpetrators, Syed Rizwan Farook and Tashfeen Malik, a married couple living in the city of Redlands, targeted a San Bernardino County Department of Public Health training event and holiday party, of about 80 employees, in a rented banquet room. Farook was an American-born U.S. citizen of Pakistani descent, who worked as a health department employee. Malik was a Pakistani-born lawful permanent resident of the United States.
+
 https://assets.documentcloud.org/documents/2714001/SB-Shooter-Order-Compelling-Apple-Asst-iPhone.pdf
+
+[Apple] will bypass or disable the auto-erase function whether or not it has been enabled;
+[Apple] will enable the FBI to submit passcodes to the SUBJECT DEVICE for testing electronically via the physical device port, Bluetooth, Wi-Fi, or other protocol available on the SUBJECT DEVICE; and
+[Apple] will ensure that when the FBI submits passcodes to the SUBJECT DEVICE, software running on the device will not purposefully introduce any additional delay between passcode attempts beyond what is incurred by Apple hardware.
+
+[Provide] the FBI with a signed iPhone Software file, recovery bundle, or other Software Image File (“SIF”) that can be loaded onto the SUBJECT DEVICE. The SIF will load and run from Random Access Memory (“RAM”) and will not modify the iOS on the actual phone, the user data partition or system partition on the device’s flash memory. The SIF will be coded by Apple with a unique identifier of the phone so that the SIF would only load and execute on the SUBJECT DEVICE. The SIF will be loaded via Device Firmware Upgrade (“DFU”) mode, recovery mode, or other applicable mode available to the FBI. Once active on the SUBJECT DEVICE, the SIF will accomplish the three functions specified in paragraph 2. The SIF will be loaded on the SUBJECT DEVICE at either a government facility, or alternatively, at an Apple facility; if the latter, Apple shall provide the government with remote access to the SUBJECT DEVICE through a computer allowed the government to conduct passcode recovery analysis.
 
 https://raw.githubusercontent.com/zyxtarmo/isecrelated/master/screen-shot-2016-02-16-at-11-14-30-pm.png
 
