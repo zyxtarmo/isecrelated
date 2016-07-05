@@ -1,0 +1,4 @@
+# bash helper
+
+while IFS= read -r line; do printf "$line\n" ; done < sample.js
+
