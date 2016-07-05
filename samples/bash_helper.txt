@@ -1,5 +1,11 @@
 # bash helper
 
-while IFS= read -r line; do printf "$line\n" ; done < sample.js
+while IFS= read -r line; do printf "$line\n" ; done < sample.js # (can break stuff)
 
-http://ddecode.com/hexdecoder/
+http://ddecode.com/hexdecoder/ # can break stuff
+
+vim 
+
+:s/;/;\r/g
+
+:wq
