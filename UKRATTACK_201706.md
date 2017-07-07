@@ -10,14 +10,17 @@
 * [Collection of tech data, 27.09](https://gist.github.com/vulnersCom/65fe44d27d29d7a5de4c176baba45759)
 
 
-# Actors
+# Impact and actors
 
-* M.E.Doc
-* 
+Three actors can be identifed:
+* M.E.Doc as suitable target in the supply chain for preparing and perfoming the attack   
+* Targeted organizations
+* State actor who prepared and perfomed the attack
 
-# Impact
+# Comparison with kinetic operations
 
-
+For comparison airstrikes, which have similar dynamics with cyber attacks, have been chosen for comparing ...
 
 # Lessons (for others)
+
 
